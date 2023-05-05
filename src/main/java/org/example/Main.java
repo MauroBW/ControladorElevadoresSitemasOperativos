@@ -33,8 +33,15 @@ public class Main {
                 }
             }
 
-            Thread.sleep(2000);
-            logger.logPasajeros(pasajeros);
+            Thread.sleep(1000);
+            if (pasajeros.size() != 0){
+                logger.logPasajeros(pasajeros);
+
+            } else if (pasajeros.size() == 0 && elevador.pasajeros.size() == 0){
+                System.out.println("No hay nuevos pedidos");
+                elevador.irAPlantaBaja();
+            }
+
             logger.logElevador(elevador);
         }
     }
