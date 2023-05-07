@@ -11,7 +11,7 @@ public class Main {
         Pasajero p2 = new Pasajero("Facundo", 0, 6);
         Pasajero p3 = new Pasajero("Chelo", 0, 4);
 
-        Elevador elevador = new Elevador("Elevador 1");
+        Elevador elevador = new Elevador("Elevator_#1");
 
         ArrayDeque<Pasajero> pasajeros = new ArrayDeque<>();
         pasajeros.add(p1);
@@ -19,8 +19,9 @@ public class Main {
         pasajeros.add(p3);
 
         logger.logPasajeros(pasajeros);
-        logger.logElevador(elevador);
         elevador.start();
+
+        System.out.println("Cantidad de hilos antes de iniciar simulacion: " + Thread.activeCount() );
 
         while (true) {
             for(Pasajero pasajero: pasajeros) {
@@ -28,7 +29,7 @@ public class Main {
 
                 if (pasajero.waitTime > 1) {
                     if (elevador.estaDisponible()){
-                        elevador.subirPasajero(pasajeros.pop());
+                        elevador.subirPasajero(pasajeros.pop()); // Esta llamada se tiene que hacer dentro del run, sino será ejecutada en el main thread
                     }
                 }
             }
@@ -43,6 +44,7 @@ public class Main {
             }
 
             logger.logElevador(elevador);
+            logger.spaces();
         }
     }
 }

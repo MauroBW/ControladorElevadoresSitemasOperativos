@@ -44,4 +44,12 @@ public class Pasajero {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public void getInfo() {
+        System.out.printf("%s {pisoActual: %s, pisoObjetivo: %s} {cronometro: %s}\n",
+                getNombre(),
+                getPisoActual(),
+                getPisoObjetivo(),
+                getWaitTime());
+    }
 }
