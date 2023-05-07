@@ -5,11 +5,11 @@ import java.util.ArrayDeque;
 public class Logger {
 
     public void logPasajeros(ArrayDeque<Pasajero> pasajeros) {
-        System.out.println("===========================================================");
-        System.out.println("                         PASAJEROS                         ");
-        System.out.println("===========================================================");
+        System.out.println("=========================================================");
+        System.out.println("              Lista de Pasajeros por Atender             ");
+        System.out.println("=========================================================");
         for(Pasajero aux: pasajeros) {
-            System.out.printf("Pasajero: %s | Piso: %s | Cronometro: %s \n", aux.getNombre(), aux.getPisoActual(), aux.getWaitTime());
+            aux.getInfo();
         }
         System.out.println("===========================================================");
     }
@@ -29,5 +29,9 @@ public class Logger {
         }
 
         System.out.println("==========================================================");
+    }
+
+    public void spaces(){
+        System.out.println("\n\n\n\n");
     }
 }

@@ -19,8 +19,8 @@ public class Elevador extends Thread{
 
     // Acciones con pasajeros
     public void subirPasajero(Pasajero pasajero) throws InterruptedException {
-        irACliente(pasajero);
-        System.out.printf("Elevador <%s>: Abriendo Puertas\n", this.nombreElevador);
+//        irACliente(pasajero);
+//        System.out.printf("Elevador <%s>: Abriendo Puertas\n", this.nombreElevador);
         if (estaDisponible()) {
             this.pasajeros.add(pasajero);
             pasajero.setEstado("En Progreso");
@@ -59,7 +59,7 @@ public class Elevador extends Thread{
 
     private void irACliente(Pasajero pasajero) {
         while (distanciaACliente(pasajero) != 0) {
-            System.out.println(distanciaACliente(pasajero));
+            System.out.println("Distancia a Cliente " + distanciaACliente(pasajero));
             if (distanciaACliente(pasajero) > 0) {
                 bajar();
             }
@@ -67,7 +67,20 @@ public class Elevador extends Thread{
                 subir();
             }
         }
+        System.out.println(Thread.currentThread().getName()); // Quiero saber si este wait se hace en el hilo main o en elevator
         System.out.printf("!!!ELEVADOR EN EL MISMO PISO QUE OBJETIVO!!!\n");
+    }
+
+    private void irADestino(Pasajero pasajero) {
+//        int distanciaObjetivo = ;
+
+        while (distanciaAObjetivo(pasajero) != 0) {
+            System.out.println("Yendo a Destino");
+            if (distanciaAObjetivo(pasajero) < 0) { subir(); }
+            else { bajar(); }
+        }
+        System.out.println("Llegue a destino");
+        bajarPasajeros();
     }
 
     private void waitTime(int seconds) {
@@ -83,8 +96,27 @@ public class Elevador extends Thread{
     }
 
     // Helpers
+
+    /**
+     * Calcula la distancia del elevador hasta el pasajero que lo solicitó
+     * @param pasajero: Pasajero que solicita el elevador
+     * @return: Distancia de pisos
+     *     (Numero negativo indica que el pasajero está en un piso superior)
+     *     (Numero positivo indica que el pasajero está en un piso inferior)
+     */
     private int distanciaACliente(Pasajero pasajero) {
         return (this.pisoActual - pasajero.getPisoActual());
+    }
+
+    /**
+     * Calcula la distancia del elevador hasta el piso objetivo del pasajero dentro del elevador
+     * @param pasajero: Pasajero dentro del elevador
+     * @return: Distancia de pisos
+     *      (Numero positivo indica que el pisoObjetivo está hacia abajo)
+     *      (Numero negativo indica que el pisoObjetivo está hacia arriba)
+     */
+    private int distanciaAObjetivo(Pasajero pasajero) {
+        return (this.pisoActual - pasajero.getPisoObjetivo());
     }
 
     @Override
@@ -92,18 +124,13 @@ public class Elevador extends Thread{
         System.out.println("Enciendo Elevador");
         while(true) {
             if (pasajeros.size() != 0) {
-                int diferenciaPisosConObjetivo = this.pisoActual - pasajeros.get(0).getPisoObjetivo();
+                Pasajero pasajeroActual = pasajeros.get(0);
 
-                if (diferenciaPisosConObjetivo < 0) {
-                    subir();
-                }
-                else if (diferenciaPisosConObjetivo > 0) {
-                    bajar();
-                }
-                else {
-                    System.out.println("\nAbrir Puertas\n");
-                    bajarPasajeros();
-                }
+                System.out.println("Desplazamiento hasta el cliente");
+                irACliente(pasajeroActual);
+
+                System.out.println("Comienza viaje");
+                irADestino(pasajeroActual);
             }
         }
     }
