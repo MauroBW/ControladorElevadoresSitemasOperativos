@@ -23,9 +23,10 @@ public class Logger {
                 elevador.pisoActual);
 
         for (Pasajero aux: elevador.pasajeros) {
-            System.out.printf("Pasajero: %s | Estado: %s\n",
+            System.out.printf("Pasajero: %s | Estado: %s | Cronometro: %s\n",
                     aux.getNombre(),
-                    aux.getEstado());
+                    aux.getEstado(),
+                    aux.getWaitTime());
         }
 
         System.out.println("==========================================================");

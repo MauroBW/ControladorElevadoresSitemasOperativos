@@ -17,6 +17,23 @@ public class Elevador extends Thread{
         this.pisoActual = 0;
     }
 
+    @Override
+    public void run() {
+        System.out.println("Enciendo Elevador");
+        while(true) {
+            if (pasajeros.size() != 0) {
+                Pasajero pasajeroActual = pasajeros.get(0);
+                pasajeroActual.increment();
+
+                System.out.println("Desplazamiento hasta el cliente");
+                irACliente(pasajeroActual);
+
+                System.out.println("Comienza viaje");
+                irADestino(pasajeroActual);
+            }
+        }
+    }
+
     // Acciones con pasajeros
     public void subirPasajero(Pasajero pasajero) throws InterruptedException {
 //        irACliente(pasajero);
@@ -75,6 +92,7 @@ public class Elevador extends Thread{
 //        int distanciaObjetivo = ;
 
         while (distanciaAObjetivo(pasajero) != 0) {
+            pasajero.increment();
             System.out.println("Yendo a Destino");
             if (distanciaAObjetivo(pasajero) < 0) { subir(); }
             else { bajar(); }
@@ -117,21 +135,5 @@ public class Elevador extends Thread{
      */
     private int distanciaAObjetivo(Pasajero pasajero) {
         return (this.pisoActual - pasajero.getPisoObjetivo());
-    }
-
-    @Override
-    public void run() {
-        System.out.println("Enciendo Elevador");
-        while(true) {
-            if (pasajeros.size() != 0) {
-                Pasajero pasajeroActual = pasajeros.get(0);
-
-                System.out.println("Desplazamiento hasta el cliente");
-                irACliente(pasajeroActual);
-
-                System.out.println("Comienza viaje");
-                irADestino(pasajeroActual);
-            }
-        }
     }
 }
