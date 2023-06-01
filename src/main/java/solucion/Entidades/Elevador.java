@@ -28,6 +28,25 @@ public class Elevador extends Thread {
             try {
                 System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
                 Pasajero candidato = null;
+
+                if(pasajerosActuales.size() != 0 ) {
+                    Pasajero siguienteEnBajar = pasajerosActuales.get(0);
+                    for(Pasajero pasajero : pasajerosActuales) {
+                        if(pasajero.getPisoObjetivo() < siguienteEnBajar.getPisoObjetivo()) {
+                            siguienteEnBajar = pasajero;
+                        }
+                    }
+
+                    if (siguienteEnBajar.pisoObjetivo < getPisoActual()) {
+                        desplazamiento("bajar");
+                    } else if (siguienteEnBajar.pisoObjetivo > getPisoActual()){
+                        desplazamiento("subir");
+                    } else {
+                        pasajerosActuales.remove(siguienteEnBajar);
+                    }
+
+                }
+
                 aceptarCliente.acquire();
 
                 if (listaCompletaPasajeros.size() != 0) {
@@ -48,7 +67,7 @@ public class Elevador extends Thread {
 
                 mostrarInfromacion();
                 Thread.sleep(1000);
-            } catch (Exception e) {}
+            } catch (Exception e) {throw new RuntimeException("Se rompio todito");}
         }
     }
 
