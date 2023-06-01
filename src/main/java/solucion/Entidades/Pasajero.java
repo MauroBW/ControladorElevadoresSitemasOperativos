@@ -11,6 +11,7 @@ public class Pasajero extends Thread {
         this.nombre = nombre;
         this.pisoActual = pisoActual;
         this.pisoObjetivo = pisoObjetivo;
+        this.setName(nombre);
     }
 
 
@@ -26,8 +27,8 @@ public class Pasajero extends Thread {
             try {
                 Thread.sleep(1000);
             } catch (Exception e) { }
-            System.out.printf("{ Nombre: %s \nTiempo: %s \nPisoObjetivo: %s \nPisoActual: %s \n}\n",
-                    getNombre(), getTiempo(), getPisoObjetivo(), getPisoActual());
+//            System.out.printf("{ Nombre: %s \nTiempo: %s \nPisoObjetivo: %s \nPisoActual: %s \n}\n",
+//                    getNombre(), getTiempo(), getPisoObjetivo(), getPisoActual());
         }
     }
 
