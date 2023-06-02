@@ -184,3 +184,22 @@ Pasajero: Chelo | Estado: En Progreso | Cronometro: 23
 |Información Elevador|
 
 <Elevator_#1> | Piso actual: 4 
+|Información Pasajeros|
+Mauro {pisoActual: 0, pisoObjetivo: 5} {cronometro: 1}
+
+Facundo {pisoActual: 0, pisoObjetivo: 6} {cronometro: 1}
+
+Chelo {pisoActual: 0, pisoObjetivo: 4} {cronometro: 1}
+
+|Información Elevador|
+
+<Elevator_#1> | Piso actual: 0 
+|Información Pasajeros|
+Facundo {pisoActual: 0, pisoObjetivo: 6} {cronometro: 2}
+
+Chelo {pisoActual: 0, pisoObjetivo: 4} {cronometro: 2}
+
+|Información Elevador|
+
+<Elevator_#1> | Piso actual: 1 
+Pasajero: Mauro | Estado: En Progreso | Cronometro: 4

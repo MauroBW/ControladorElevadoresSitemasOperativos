@@ -16,6 +16,7 @@ public class Main {
         listaPasajeros.add(new Pasajero("P1", 1,6));
         listaPasajeros.add(new Pasajero("P2", 4,6));
         listaPasajeros.add(new Pasajero("P3", 0,6));
+        listaPasajeros.add(new Pasajero("P4", 0,6));
 
         // Despierto pasajeros
         for (Pasajero pasajero : listaPasajeros) {
