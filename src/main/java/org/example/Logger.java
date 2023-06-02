@@ -1,5 +1,7 @@
 package org.example;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayDeque;
 
 public class Logger {
@@ -9,7 +11,7 @@ public class Logger {
         System.out.println("              Lista de Pasajeros por Atender             ");
         System.out.println("=========================================================");
         for(Pasajero aux: pasajeros) {
-            aux.getInfo();
+            aux.printInfo();
         }
         System.out.println("===========================================================");
     }
@@ -23,15 +25,53 @@ public class Logger {
                 elevador.pisoActual);
 
         for (Pasajero aux: elevador.pasajeros) {
-            System.out.printf("Pasajero: %s | Estado: %s\n",
+            System.out.printf("Pasajero: %s | Estado: %s | Cronometro: %s\n",
                     aux.getNombre(),
-                    aux.getEstado());
+                    aux.getEstado(),
+                    aux.getWaitTime());
         }
 
         System.out.println("==========================================================");
     }
 
+    public String savePasajerosData(ArrayDeque<Pasajero> pasajeros) {
+        String data = "|Información Pasajeros|\n";
+        for(Pasajero aux: pasajeros) {
+            data += aux.getInfo() + "\n";
+        }
+        return data;
+    }
+
+    public String saveElevadorData(Elevador elevador) {
+        String data = "|Información Elevador|\n";
+
+        data += String.format("\n<%s> | Piso actual: %s \n",
+                elevador.nombreElevador,
+                elevador.pisoActual);
+
+        for (Pasajero aux: elevador.pasajeros) {
+            data += String.format("Pasajero: %s | Estado: %s | Cronometro: %s\n",
+                    aux.getNombre(),
+                    aux.getEstado(),
+                    aux.getWaitTime());
+        }
+        return data;
+    }
+
     public void spaces(){
         System.out.println("\n\n\n\n");
+    }
+
+
+    public void saveLog(String text) {
+        try {
+            FileWriter writer = new FileWriter("log.txt", true);
+            writer.write(text);
+            writer.close();
+            System.out.println("El string se ha escrito en el archivo correctamente.");
+        } catch (Exception e) {
+            System.out.println("Ha ocurrido un error al escribir el archivo.");
+            e.printStackTrace();
+        }
     }
 }

@@ -12,13 +12,15 @@ public class Main {
         Pasajero p3 = new Pasajero("Chelo", 0, 4);
 
         Elevador elevador = new Elevador("Elevator_#1");
+        ElevadorNotificaciones test = new ElevadorNotificaciones("test");
+        test.start();
 
         ArrayDeque<Pasajero> pasajeros = new ArrayDeque<>();
         pasajeros.add(p1);
         pasajeros.add(p2);
         pasajeros.add(p3);
 
-        logger.logPasajeros(pasajeros);
+//        logger.logPasajeros(pasajeros);
         elevador.start();
 
         System.out.println("Cantidad de hilos antes de iniciar simulacion: " + Thread.activeCount() );
@@ -34,7 +36,8 @@ public class Main {
                 }
             }
 
-            Thread.sleep(1000);
+
+
             if (pasajeros.size() != 0){
                 logger.logPasajeros(pasajeros);
 
@@ -42,9 +45,12 @@ public class Main {
                 System.out.println("No hay nuevos pedidos");
                 elevador.irAPlantaBaja();
             }
+            logger.saveLog(logger.savePasajerosData(pasajeros));
+            logger.saveLog(logger.saveElevadorData(elevador));
 
             logger.logElevador(elevador);
             logger.spaces();
+            Thread.sleep(1000);
         }
     }
 }
