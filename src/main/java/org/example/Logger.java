@@ -63,9 +63,9 @@ public class Logger {
     }
 
 
-    public void saveLog(String text) {
+    public void saveLog(String fileName, String text) {
         try {
-            FileWriter writer = new FileWriter("log.txt", true);
+            FileWriter writer = new FileWriter(fileName, true);
             writer.write(text);
             writer.close();
             System.out.println("El string se ha escrito en el archivo correctamente.");

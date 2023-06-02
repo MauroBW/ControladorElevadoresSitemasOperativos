@@ -14,7 +14,7 @@ public class Main {
         Queue<Pasajero> listaPasajeros = new LinkedList<>();
 
         listaPasajeros.add(new Pasajero("P1", 1,6));
-        listaPasajeros.add(new Pasajero("P2", 4,6));
+        listaPasajeros.add(new Pasajero("P2", 4,3));
         listaPasajeros.add(new Pasajero("P3", 0,6));
         listaPasajeros.add(new Pasajero("P4", 0,6));
 
@@ -23,7 +23,7 @@ public class Main {
             pasajero.start();
         }
 
-        (new Elevador(0, "##1", listaPasajeros)).start();
+        (new Elevador(1, "##1", listaPasajeros)).start();
         (new Elevador(0, "##2", listaPasajeros)).start();
 
     }
