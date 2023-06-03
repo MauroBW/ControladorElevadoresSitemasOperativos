@@ -1,13 +1,3 @@
-{ Nombre: P1 
-Tiempo: 1 
-PisoObjetivo: 6 
-PisoActual: 1 
-}
-{ Nombre: P3 
-Tiempo: 1 
-PisoObjetivo: 6 
-PisoActual: 0 
-}
 { Nombre: P2 
 Tiempo: 1 
 PisoObjetivo: 3 
@@ -19,17 +9,12 @@ PisoObjetivo: 6
 PisoActual: 0 
 }
 { Nombre: P3 
-Tiempo: 2 
+Tiempo: 1 
 PisoObjetivo: 6 
 PisoActual: 0 
 }
-{ Nombre: P2 
-Tiempo: 2 
-PisoObjetivo: 3 
-PisoActual: 4 
-}
 { Nombre: P1 
-Tiempo: 2 
+Tiempo: 1 
 PisoObjetivo: 6 
 PisoActual: 1 
 }
@@ -37,6 +22,21 @@ PisoActual: 1
 Tiempo: 2 
 PisoObjetivo: 6 
 PisoActual: 0 
+}
+{ Nombre: P3 
+Tiempo: 2 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P1 
+Tiempo: 2 
+PisoObjetivo: 6 
+PisoActual: 1 
+}
+{ Nombre: P2 
+Tiempo: 2 
+PisoObjetivo: 3 
+PisoActual: 4 
 }
 { Nombre: P2 
 Tiempo: 3 
@@ -47,16 +47,16 @@ PisoActual: 4
 Tiempo: 3 
 PisoObjetivo: 6 
 PisoActual: 1 
+}
+{ Nombre: P4 
+Tiempo: 3 
+PisoObjetivo: 6 
+PisoActual: 0 
 }
 { Nombre: P1 
 Tiempo: 3 
 PisoObjetivo: 6 
 PisoActual: 2 
-}
-{ Nombre: P4 
-Tiempo: 3 
-PisoObjetivo: 6 
-PisoActual: 0 
 }
 { Nombre: P2 
 Tiempo: 4 
@@ -83,11 +83,6 @@ Tiempo: 5
 PisoObjetivo: 6 
 PisoActual: 3 
 }
-{ Nombre: P2 
-Tiempo: 5 
-PisoObjetivo: 3 
-PisoActual: 4 
-}
 { Nombre: P4 
 Tiempo: 5 
 PisoObjetivo: 6 
@@ -99,19 +94,14 @@ PisoObjetivo: 6
 PisoActual: 4 
 }
 { Nombre: P2 
-Tiempo: 6 
+Tiempo: 5 
 PisoObjetivo: 3 
 PisoActual: 4 
 }
-{ Nombre: P3 
+{ Nombre: P2 
 Tiempo: 6 
-PisoObjetivo: 6 
+PisoObjetivo: 3 
 PisoActual: 4 
-}
-{ Nombre: P4 
-Tiempo: 6 
-PisoObjetivo: 6 
-PisoActual: 0 
 }
 { Nombre: P1 
 Tiempo: 6 
@@ -119,6 +109,461 @@ PisoObjetivo: 6
 PisoActual: 5 
 }
 { Nombre: P3 
+Tiempo: 6 
+PisoObjetivo: 6 
+PisoActual: 4 
+}
+{ Nombre: P4 
+Tiempo: 6 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P2 
+Tiempo: 7 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P1 
+Tiempo: 7 
+PisoObjetivo: 6 
+PisoActual: 5 
+}
+{ Nombre: P4 
+Tiempo: 7 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P3 
+Tiempo: 7 
+PisoObjetivo: 6 
+PisoActual: 5 
+}
+{ Nombre: P2 
+Tiempo: 8 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P3 
+Tiempo: 8 
+PisoObjetivo: 6 
+PisoActual: 5 
+}
+{ Nombre: P1 
+Tiempo: 8 
+PisoObjetivo: 6 
+PisoActual: 5 
+}
+{ Nombre: P4 
+Tiempo: 8 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P3 
+Tiempo: 9 
+PisoObjetivo: 6 
+PisoActual: 5 
+}
+{ Nombre: P4 
+Tiempo: 9 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P1 
+Tiempo: 9 
+PisoObjetivo: 6 
+PisoActual: 5 
+}
+{ Nombre: P2 
+Tiempo: 9 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P2 
+Tiempo: 10 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P3 
+Tiempo: 10 
+PisoObjetivo: 6 
+PisoActual: 5 
+}
+{ Nombre: P4 
+Tiempo: 10 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P1 
+Tiempo: 10 
+PisoObjetivo: 6 
+PisoActual: 5 
+}
+{ Nombre: P2 
+Tiempo: 1 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P3 
+Tiempo: 1 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P1 
+Tiempo: 1 
+PisoObjetivo: 6 
+PisoActual: 1 
+}
+{ Nombre: P4 
+Tiempo: 1 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P1 
+Tiempo: 2 
+PisoObjetivo: 6 
+PisoActual: 1 
+}
+{ Nombre: P2 
+Tiempo: 2 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P4 
+Tiempo: 2 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P3 
+Tiempo: 2 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P2 
+Tiempo: 3 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P4 
+Tiempo: 3 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P1 
+Tiempo: 3 
+PisoObjetivo: 6 
+PisoActual: 2 
+}
+{ Nombre: P3 
+Tiempo: 3 
+PisoObjetivo: 6 
+PisoActual: 1 
+}
+{ Nombre: P4 
+Tiempo: 4 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P1 
+Tiempo: 4 
+PisoObjetivo: 6 
+PisoActual: 3 
+}
+{ Nombre: P2 
+Tiempo: 4 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P3 
+Tiempo: 4 
+PisoObjetivo: 6 
+PisoActual: 2 
+}
+{ Nombre: P2 
+Tiempo: 5 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P4 
+Tiempo: 5 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P1 
+Tiempo: 5 
+PisoObjetivo: 6 
+PisoActual: 4 
+}
+{ Nombre: P3 
+Tiempo: 5 
+PisoObjetivo: 6 
+PisoActual: 3 
+}
+{ Nombre: P2 
+Tiempo: 6 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P1 
+Tiempo: 6 
+PisoObjetivo: 6 
+PisoActual: 5 
+}
+{ Nombre: P4 
+Tiempo: 6 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P3 
+Tiempo: 6 
+PisoObjetivo: 6 
+PisoActual: 4 
+}
+{ Nombre: P1 
+Tiempo: 7 
+PisoObjetivo: 6 
+PisoActual: 6 
+}
+{ Nombre: P4 
+Tiempo: 7 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P2 
+Tiempo: 7 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P3 
+Tiempo: 7 
+PisoObjetivo: 6 
+PisoActual: 5 
+}
+{ Nombre: P1 
+Tiempo: 8 
+PisoObjetivo: 6 
+PisoActual: 6 
+}
+{ Nombre: P4 
+Tiempo: 8 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P3 
+Tiempo: 8 
+PisoObjetivo: 6 
+PisoActual: 6 
+}
+{ Nombre: P2 
+Tiempo: 8 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P1 
+Tiempo: 9 
+PisoObjetivo: 6 
+PisoActual: 6 
+}
+{ Nombre: P2 
+Tiempo: 9 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P4 
+Tiempo: 9 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P3 
+Tiempo: 9 
+PisoObjetivo: 6 
+PisoActual: 6 
+}
+{ Nombre: P1 
+Tiempo: 10 
+PisoObjetivo: 6 
+PisoActual: 6 
+}
+{ Nombre: P4 
+Tiempo: 10 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P3 
+Tiempo: 10 
+PisoObjetivo: 6 
+PisoActual: 6 
+}
+{ Nombre: P2 
+Tiempo: 10 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P4 
+Tiempo: 11 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P1 
+Tiempo: 11 
+PisoObjetivo: 6 
+PisoActual: 6 
+}
+{ Nombre: P2 
+Tiempo: 11 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P3 
+Tiempo: 11 
+PisoObjetivo: 6 
+PisoActual: 6 
+}
+{ Nombre: P1 
+Tiempo: 12 
+PisoObjetivo: 6 
+PisoActual: 6 
+}
+{ Nombre: P4 
+Tiempo: 12 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P3 
+Tiempo: 12 
+PisoObjetivo: 6 
+PisoActual: 6 
+}
+{ Nombre: P2 
+Tiempo: 12 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P1 
+Tiempo: 1 
+PisoObjetivo: 6 
+PisoActual: 1 
+}
+{ Nombre: P2 
+Tiempo: 1 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P4 
+Tiempo: 1 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P3 
+Tiempo: 1 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P2 
+Tiempo: 2 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P1 
+Tiempo: 2 
+PisoObjetivo: 6 
+PisoActual: 1 
+}
+{ Nombre: P4 
+Tiempo: 2 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P3 
+Tiempo: 2 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P1 
+Tiempo: 3 
+PisoObjetivo: 6 
+PisoActual: 2 
+}
+{ Nombre: P2 
+Tiempo: 3 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P3 
+Tiempo: 3 
+PisoObjetivo: 6 
+PisoActual: 1 
+}
+{ Nombre: P4 
+Tiempo: 3 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P1 
+Tiempo: 4 
+PisoObjetivo: 6 
+PisoActual: 3 
+}
+{ Nombre: P2 
+Tiempo: 4 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P3 
+Tiempo: 4 
+PisoObjetivo: 6 
+PisoActual: 2 
+}
+{ Nombre: P4 
+Tiempo: 4 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P2 
+Tiempo: 5 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P1 
+Tiempo: 5 
+PisoObjetivo: 6 
+PisoActual: 4 
+}
+{ Nombre: P3 
+Tiempo: 5 
+PisoObjetivo: 6 
+PisoActual: 3 
+}
+{ Nombre: P4 
+Tiempo: 5 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P3 
+Tiempo: 6 
+PisoObjetivo: 6 
+PisoActual: 4 
+}
+{ Nombre: P1 
+Tiempo: 6 
+PisoObjetivo: 6 
+PisoActual: 5 
+}
+{ Nombre: P2 
+Tiempo: 6 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
+{ Nombre: P4 
+Tiempo: 6 
+PisoObjetivo: 6 
+PisoActual: 0 
+}
+{ Nombre: P3 
+Tiempo: 7 
+PisoObjetivo: 6 
+PisoActual: 5 
+}
+{ Nombre: P1 
 Tiempo: 7 
 PisoObjetivo: 6 
 PisoActual: 5 
@@ -133,128 +578,43 @@ Tiempo: 7
 PisoObjetivo: 6 
 PisoActual: 0 
 }
-{ Nombre: P1 
-Tiempo: 7 
-PisoObjetivo: 6 
-PisoActual: 6 
-}
-{ Nombre: P2 
-Tiempo: 8 
-PisoObjetivo: 3 
-PisoActual: 4 
-}
 { Nombre: P3 
 Tiempo: 8 
 PisoObjetivo: 6 
-PisoActual: 6 
+PisoActual: 5 
 }
 { Nombre: P4 
 Tiempo: 8 
 PisoObjetivo: 6 
 PisoActual: 0 
 }
+{ Nombre: P2 
+Tiempo: 8 
+PisoObjetivo: 3 
+PisoActual: 4 
+}
 { Nombre: P1 
 Tiempo: 8 
 PisoObjetivo: 6 
-PisoActual: 6 
+PisoActual: 5 
+}
+{ Nombre: P3 
+Tiempo: 9 
+PisoObjetivo: 6 
+PisoActual: 5 
+}
+{ Nombre: P2 
+Tiempo: 9 
+PisoObjetivo: 3 
+PisoActual: 4 
 }
 { Nombre: P4 
 Tiempo: 9 
 PisoObjetivo: 6 
 PisoActual: 0 
 }
-{ Nombre: P2 
-Tiempo: 9 
-PisoObjetivo: 3 
-PisoActual: 4 
-}
-{ Nombre: P3 
-Tiempo: 9 
-PisoObjetivo: 6 
-PisoActual: 6 
-}
 { Nombre: P1 
 Tiempo: 9 
 PisoObjetivo: 6 
-PisoActual: 6 
-}
-{ Nombre: P2 
-Tiempo: 10 
-PisoObjetivo: 3 
-PisoActual: 4 
-}
-{ Nombre: P4 
-Tiempo: 10 
-PisoObjetivo: 6 
-PisoActual: 0 
-}
-{ Nombre: P3 
-Tiempo: 10 
-PisoObjetivo: 6 
-PisoActual: 6 
-}
-{ Nombre: P1 
-Tiempo: 10 
-PisoObjetivo: 6 
-PisoActual: 6 
-}
-{ Nombre: P3 
-Tiempo: 11 
-PisoObjetivo: 6 
-PisoActual: 6 
-}
-{ Nombre: P2 
-Tiempo: 11 
-PisoObjetivo: 3 
-PisoActual: 4 
-}
-{ Nombre: P4 
-Tiempo: 11 
-PisoObjetivo: 6 
-PisoActual: 0 
-}
-{ Nombre: P1 
-Tiempo: 11 
-PisoObjetivo: 6 
-PisoActual: 6 
-}
-{ Nombre: P4 
-Tiempo: 12 
-PisoObjetivo: 6 
-PisoActual: 0 
-}
-{ Nombre: P3 
-Tiempo: 12 
-PisoObjetivo: 6 
-PisoActual: 6 
-}
-{ Nombre: P2 
-Tiempo: 12 
-PisoObjetivo: 3 
-PisoActual: 4 
-}
-{ Nombre: P1 
-Tiempo: 12 
-PisoObjetivo: 6 
-PisoActual: 6 
-}
-{ Nombre: P4 
-Tiempo: 13 
-PisoObjetivo: 6 
-PisoActual: 0 
-}
-{ Nombre: P2 
-Tiempo: 13 
-PisoObjetivo: 3 
-PisoActual: 4 
-}
-{ Nombre: P3 
-Tiempo: 13 
-PisoObjetivo: 6 
-PisoActual: 6 
-}
-{ Nombre: P1 
-Tiempo: 13 
-PisoObjetivo: 6 
-PisoActual: 6 
+PisoActual: 5 
 }

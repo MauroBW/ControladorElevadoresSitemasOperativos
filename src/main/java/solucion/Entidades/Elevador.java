@@ -42,6 +42,7 @@ public class Elevador extends Thread {
                         subirPasajero(aux);
                     }
                 }
+                bajarClientes();
 
 
 
@@ -56,15 +57,8 @@ public class Elevador extends Thread {
 //                        }
 //                    }
 //                    System.out.println(getIdentificador() + " Siguiente en Bajar: " + siguienteEnBajar.getNombre());
-//                    if (siguienteEnBajar.pisoObjetivo < getPisoActual()) {
-//                        desplazamiento("bajar");
-//                    } else if (siguienteEnBajar.pisoObjetivo > getPisoActual()) {
-//                        desplazamiento("subir");
-//                    } else {
-//                        pasajerosActuales.remove(siguienteEnBajar);
-//                    }
-//                    mostrarInfromacion();
-//                    Thread.sleep(1000);
+//
+
 
 //                } else {
 
@@ -120,6 +114,17 @@ public class Elevador extends Thread {
             } else {
                 System.out.println(getIdentificador() + "Llegue a objetivo");
             }
+    }
+
+    public void bajarClientes() {
+        if(getPasajerosActuales().size() !=0) {
+            for(Pasajero pasajero : getPasajerosActuales()) {
+                if (pasajero.getPisoObjetivo() == getPisoActual()) {
+                    System.out.println(pasajero.getName() + " Este tiene que bajar:p");
+                    this.pasajerosActuales.remove(pasajero);
+                }
+            }
+        }
     }
 
     public Pasajero obtenerPasajeroMasCercano(List<Pasajero> listaPasajeros) {
