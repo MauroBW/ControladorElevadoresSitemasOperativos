@@ -33,13 +33,17 @@ public class Elevador extends Thread {
 
 
                 if(!pasajerosActuales.isEmpty()) {
-                    comenzarMovimiento(obtenerPasajeroMasCercano(pasajerosActuales).getPisoObjetivo());
+                    comenzarMovimiento(obtenerObjetivoMasCercano(pasajerosActuales).getPisoObjetivo());
+                } else if(pasajerosActuales.size() < CAPACIDAD) {
+                    Pasajero aux = procesarNuevoPedido();
+                    System.out.println("Aux -> "  + aux.getNombre());
+                    comenzarMovimiento(aux.getPisoActual());
+                    if (aux.getPisoActual() == getPisoActual()) {
+                        subirPasajero(aux);
+                    }
                 }
 
-                if(pasajerosActuales.size() < CAPACIDAD) {
-                    Pasajero aux = procesarNuevoPedido();
-                    comenzarMovimiento(aux.getPisoActual());
-                }
+
 
 
 
@@ -92,6 +96,10 @@ public class Elevador extends Thread {
         }
     }
 
+    private void subirPasajero(Pasajero aux) {
+        this.pasajerosActuales.add(aux);
+    }
+
     public String getIdentificador() {
         return identificador;
     }
@@ -120,7 +128,25 @@ public class Elevador extends Thread {
 
         for (Pasajero pasajero : listaPasajeros) {
             int diferencia = diferenciaDePisos(pasajero.getPisoActual(), this.pisoActual);
-            System.out.println(getIdentificador() + " Difiere " + diferencia + " con " + pasajero.getNombre());
+//            System.out.println(getIdentificador() + " Difiere " + diferencia + " con " + pasajero.getNombre());
+            if (diferencia < menorDiferencia) {
+                pasajeroCercano = pasajero;
+                menorDiferencia = diferencia;
+            }
+        }
+        if (pasajeroCercano != null) {System.out.println(pasajeroCercano.getName());};
+
+        return pasajeroCercano;
+    }
+
+    public Pasajero obtenerObjetivoMasCercano(List<Pasajero> listaPasajeros) {
+        Pasajero pasajeroCercano = null;
+        int menorDiferencia = Integer.MAX_VALUE;
+
+        for (Pasajero pasajero : listaPasajeros) {
+            pasajero.setPisoActual(this.pisoActual);
+            int diferencia = diferenciaDePisos(pasajero.getPisoObjetivo(), this.pisoActual);
+//            System.out.println(getIdentificador() + " Difiere " + diferencia + " con " + pasajero.getNombre());
             if (diferencia < menorDiferencia) {
                 pasajeroCercano = pasajero;
                 menorDiferencia = diferencia;
