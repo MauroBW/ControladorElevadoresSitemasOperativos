@@ -4,12 +4,12 @@ import solucion.Helpers.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.Semaphore;
 
 public class Elevador extends Thread {
     private int pisoActual;
     private String identificador;
+    private int tiempo = 0;
     private List<Pasajero> pasajerosActuales = new ArrayList<>();
     private static List<Pasajero> listaCompletaPasajeros;
     private List<Pasajero> candidatos = new ArrayList<>();
@@ -28,7 +28,7 @@ public class Elevador extends Thread {
     public void run() {
         while (true) {
             try {
-                mostrarInfromacion();
+                registrarInfromacion();
                 System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
 
 
@@ -58,12 +58,14 @@ public class Elevador extends Thread {
                     }
                 }
 
+                if(pasajerosActuales.isEmpty() && listaCompletaPasajeros.isEmpty() && candidatos.isEmpty()) {
+                    throw new RuntimeException("Ejecucion terminada");
+                }
 
-
-
+                tick();
                 Thread.sleep(1000);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
                 throw new RuntimeException("Se rompio todito");
             }
         }
@@ -110,15 +112,15 @@ public class Elevador extends Thread {
             List<Pasajero> pasajerosParaEliminar = new ArrayList<>();
             for (Pasajero pasajero : getPasajerosActuales()) {
                 if (pasajero.getPisoObjetivo() == getPisoActual()) {
-                    System.out.println(pasajero.getName() + " Este tiene que bajar:p");
-                    System.out.println("DEBUG" + mostrarInformacionPasajerosEnCabina());
-
                     pasajerosParaEliminar.add(pasajero);
                 }
             }
-            getPasajerosActuales().removeAll(pasajerosParaEliminar);
+            if (!pasajerosParaEliminar.isEmpty()){
+                new Logger().saveLog(getIdentificador() + "_Log.txt", mostrarInformacion(pasajerosParaEliminar));
+            }
 
-            System.out.println("DEBUG" + mostrarInformacionPasajerosEnCabina());
+            System.out.println("Se bajan los pasajeros: " + mostrarInformacion(pasajerosParaEliminar));
+            getPasajerosActuales().removeAll(pasajerosParaEliminar);
         }
     }
 
@@ -147,7 +149,6 @@ public class Elevador extends Thread {
         for (Pasajero pasajero : listaPasajeros) {
             pasajero.setPisoActual(this.pisoActual);
             int diferencia = diferenciaDePisos(pasajero.getPisoObjetivo(), this.pisoActual);
-//            System.out.println(getIdentificador() + " Difiere " + diferencia + " con " + pasajero.getNombre());
             if (diferencia < menorDiferencia) {
                 pasajeroCercano = pasajero;
                 menorDiferencia = diferencia;
@@ -156,7 +157,6 @@ public class Elevador extends Thread {
         if (pasajeroCercano != null) {
             System.out.println(pasajeroCercano.getName());
         }
-        ;
 
         return pasajeroCercano;
     }
@@ -182,6 +182,18 @@ public class Elevador extends Thread {
         return pasajerosActuales;
     }
 
+    public void tick() {
+        tiempo ++;
+    }
+
+    public int getTiempo() {
+        return tiempo;
+    }
+
+    public String getTickRateMasID() {
+        return String.format("Tick:%s - Elevador%s", getTiempo(), getIdentificador());
+    }
+
     public String mostrarInformacionPasajerosEnCabina() {
         String informacionPasajeros = "";
 
@@ -192,10 +204,20 @@ public class Elevador extends Thread {
         return informacionPasajeros;
     }
 
-    public void mostrarInfromacion() {
+    public String mostrarInformacion(List<Pasajero> pasajeros) {
+        String informacionPasajeros = "";
 
-        new Logger().saveLog(getIdentificador() + "_Log.txt", String.format("[[ Elevador: %s , PisoActual: %s, Pasajeros: %s|]]\n", getIdentificador(), getPisoActual(), mostrarInformacionPasajerosEnCabina()));
+        for (Pasajero pasajero : pasajeros) {
+            informacionPasajeros += String.format("%s ~BAJAN~| Nombre: %s, PisoObjetivo: %s \n",
+                    getTickRateMasID(), pasajero.getNombre(), pasajero.getPisoObjetivo());
+        }
+        return informacionPasajeros;
+    }
+
+    public void registrarInfromacion() {
+
+        new Logger().saveLog(getIdentificador() + "_Log.txt", String.format("[[ Elevador: %s , PisoActual: %s, Pasajeros: %s|]]\n", getTickRateMasID(), getPisoActual(), mostrarInformacionPasajerosEnCabina()));
         System.out.printf("[[ Elevador: %s , PisoActual: %s, Pasajeros: %s|]]\n",
-                getIdentificador(), getPisoActual(), mostrarInformacionPasajerosEnCabina());
+                getTickRateMasID(), getPisoActual(), mostrarInformacionPasajerosEnCabina());
     }
 }
