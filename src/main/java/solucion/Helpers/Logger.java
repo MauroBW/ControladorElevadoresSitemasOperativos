@@ -74,7 +74,7 @@ public class Logger {
             FileWriter writer = new FileWriter(fileName, true);
             writer.write(text);
             writer.close();
-            System.out.println("El string se ha escrito en el archivo correctamente.");
+//            System.out.println("El string se ha escrito en el archivo correctamente.");
         } catch (Exception e) {
             System.out.println("Ha ocurrido un error al escribir el archivo.");
             e.printStackTrace();

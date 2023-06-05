@@ -11,7 +11,7 @@ import java.util.Queue;
 public class Main {
     public static void main(String[] args) {
 
-        Queue<Pasajero> listaPasajeros = new LinkedList<>();
+        List<Pasajero> listaPasajeros = new LinkedList<>();
 
         listaPasajeros.add(new Pasajero("P1", 1,6));
         listaPasajeros.add(new Pasajero("P2", 4,3));
