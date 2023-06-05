@@ -1,5 +1,7 @@
 package solucion;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import solucion.Entidades.Elevador;
 import solucion.Entidades.Pasajero;
 
@@ -8,9 +10,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-
+        SpringApplication.run(Main.class, args);
         List<Pasajero> listaPasajeros = new LinkedList<>();
 
         listaPasajeros.add(new Pasajero("P1", 1,6));

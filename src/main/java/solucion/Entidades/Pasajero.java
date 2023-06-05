@@ -16,6 +16,10 @@ public class Pasajero extends Thread {
         this.setName(nombre);
     }
 
+    public Pasajero() {
+
+    }
+
 
     @Override
     public void run() {
