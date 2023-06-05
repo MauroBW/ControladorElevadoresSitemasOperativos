@@ -49,7 +49,7 @@ public class Elevador extends Thread {
                     }
                     if(!candidatos.isEmpty()) {
                         Pasajero clienteCandidato = obtenerPasajeroMasCercano(candidatos);
-                        movimientoHaciaCliente(clienteCandidato.getPisoActual());
+                        comenzarMovimiento(clienteCandidato.getPisoActual());
                         if(clienteCandidato.getPisoActual() == getPisoActual()) {
                             subirPasajero(clienteCandidato);
                             System.out.println("Llegue a candidato");
@@ -59,7 +59,8 @@ public class Elevador extends Thread {
                 }
 
                 if(pasajerosActuales.isEmpty() && listaCompletaPasajeros.isEmpty() && candidatos.isEmpty()) {
-                    throw new RuntimeException("Ejecucion terminada");
+//                    throw new RuntimeException("Ejecucion terminada");
+                    comenzarMovimiento(0);
                 }
 
                 tick();
@@ -97,6 +98,12 @@ public class Elevador extends Thread {
         }
     }
 
+    /**
+     * Realiza movimiento del Elevador hacia objetivo
+     * @param pisoObjetivo:
+     *  - Si pisoObjetivo es menor a pisoActual, entonces Bajo
+     *  - Si pisoObjetivo es mayor a pisoActual, entonces Subo
+     */
     public void comenzarMovimiento(int pisoObjetivo) {
         if (pisoObjetivo < getPisoActual()) {
             desplazamiento("BAJAR");
@@ -107,6 +114,10 @@ public class Elevador extends Thread {
         }
     }
 
+    /**
+     * Recorre la lista de pasajerosActuales y baja a los que coincidan en pisoObjetivo
+     * Con pisoActual del Elevador
+     */
     public void bajarClientes() {
         if (!getPasajerosActuales().isEmpty()) {
             List<Pasajero> pasajerosParaEliminar = new ArrayList<>();
@@ -124,6 +135,11 @@ public class Elevador extends Thread {
         }
     }
 
+    /**
+     * Devuelve el pasajero cuyo pisoActual es el más cercano al elevador
+     * @param listaPasajeros
+     * @return
+     */
     public Pasajero obtenerPasajeroMasCercano(List<Pasajero> listaPasajeros) {
         Pasajero pasajeroCercano = null;
         int menorDiferencia = Integer.MAX_VALUE;
@@ -142,6 +158,11 @@ public class Elevador extends Thread {
         return pasajeroCercano;
     }
 
+    /**
+     * Devuelve el Pasajero que tiene el pisoObjetivo más cercano al elevador
+     * @param listaPasajeros
+     * @return Pasajero con pisoObjetivo mas cercano
+     */
     public Pasajero obtenerObjetivoMasCercano(List<Pasajero> listaPasajeros) {
         Pasajero pasajeroCercano = null;
         int menorDiferencia = Integer.MAX_VALUE;
@@ -161,10 +182,19 @@ public class Elevador extends Thread {
         return pasajeroCercano;
     }
 
+    /**
+     * @param piso_1
+     * @param piso_2
+     * @return Devuelve diferencia de pisos en valor Absoluto
+     */
     public int diferenciaDePisos(int piso_1, int piso_2) {
         return Math.abs(piso_1 - piso_2);
     }
 
+    /**
+     * Sube o Baja una unidad dependiendo del sentido de navegaciín
+     * @param sentido: Sentido para la navegación
+     */
     public void desplazamiento(String sentido) {
         switch (sentido) {
             case "SUBIR":
