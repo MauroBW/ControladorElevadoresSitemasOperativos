@@ -1,5 +1,7 @@
 package solucion.Entidades;
 
+import solucion.Helpers.Logger;
+
 public class Pasajero extends Thread {
 
     public int tiempo = 0;
@@ -27,8 +29,8 @@ public class Pasajero extends Thread {
             try {
                 Thread.sleep(1000);
             } catch (Exception e) { }
-//            System.out.printf("{ Nombre: %s \nTiempo: %s \nPisoObjetivo: %s \nPisoActual: %s \n}\n",
-//                    getNombre(), getTiempo(), getPisoObjetivo(), getPisoActual());
+            new Logger().saveLog("##pasajeros_Log.txt", String.format("{ Nombre: %s \nTiempo: %s \nPisoObjetivo: %s \nPisoActual: %s \n}\n",
+                    getNombre(), getTiempo(), getPisoObjetivo(), getPisoActual()));
         }
     }
 
@@ -50,5 +52,9 @@ public class Pasajero extends Thread {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public void setPisoActual(int pisoActual) {
+        this.pisoActual = pisoActual;
     }
 }

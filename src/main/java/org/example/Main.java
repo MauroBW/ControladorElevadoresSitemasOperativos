@@ -45,8 +45,8 @@ public class Main {
                 System.out.println("No hay nuevos pedidos");
                 elevador.irAPlantaBaja();
             }
-            logger.saveLog(logger.savePasajerosData(pasajeros));
-            logger.saveLog(logger.saveElevadorData(elevador));
+//            logger.saveLog(logger.savePasajerosData(pasajeros));
+//            logger.saveLog(logger.saveElevadorData(elevador));
 
             logger.logElevador(elevador);
             logger.spaces();
