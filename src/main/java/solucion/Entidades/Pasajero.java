@@ -22,7 +22,6 @@ public class Pasajero extends Thread {
 
     }
 
-
     @Override
     public void run() {
         while (true) {
@@ -42,6 +41,10 @@ public class Pasajero extends Thread {
 
     public void tick() {
         this.tiempo += 1;
+    }
+
+    public int getPeso() {
+        return peso;
     }
 
     public int getTiempo() {
