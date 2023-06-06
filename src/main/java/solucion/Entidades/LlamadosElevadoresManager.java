@@ -5,12 +5,17 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 public class LlamadosElevadoresManager {
-    private static List<Pasajero> listaPasajeros;
+    private static List<Pasajero> listaPasajeros = new LinkedList<>();
+    private String identificadorLog;
 
     public LlamadosElevadoresManager() {
-        listaPasajeros = new LinkedList<>();
+    }
+
+    public void agregarPasajero(Pasajero pasajero) {
+        listaPasajeros.add(pasajero);
     }
 
     public static void agregarPasajero(String nombre, int peso, int pisoOrigen, int pisoDestino) {

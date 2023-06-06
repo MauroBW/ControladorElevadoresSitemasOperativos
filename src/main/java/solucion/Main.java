@@ -1,5 +1,7 @@
 package solucion;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import solucion.Entidades.Elevador;
 import solucion.Entidades.Pasajero;
 import solucion.Entidades.LlamadosElevadoresManager;
@@ -12,12 +14,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
         
         System.out.println(Helper.generarIdentificador());
         Logger.saveLog("Hola.txt", "Hola Mundo");
         LlamadosElevadoresManager manager = new LlamadosElevadoresManager();
+        SpringApplication.run(Main.class, args);
+        List<Pasajero> listaPasajeros = new LinkedList<>();
 
         manager.agregarPasajero("P1", 90, 1, 6);
         manager.agregarPasajero("P2", 85,4, 3);

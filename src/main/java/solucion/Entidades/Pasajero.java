@@ -18,6 +18,9 @@ public class Pasajero extends Thread {
         this.setName(nombre);
     }
 
+    public Pasajero() {
+
+    }
 
     @Override
     public void run() {
@@ -38,6 +41,10 @@ public class Pasajero extends Thread {
 
     public void tick() {
         this.tiempo += 1;
+    }
+
+    public int getPeso() {
+        return peso;
     }
 
     public int getTiempo() {
