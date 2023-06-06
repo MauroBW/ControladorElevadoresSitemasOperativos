@@ -6,11 +6,13 @@ public class Pasajero extends Thread {
 
     public int tiempo = 0;
     public String nombre;
+    public int peso;
     public int pisoActual;
     public int pisoObjetivo;
 
-    public Pasajero(String nombre, int pisoActual, int pisoObjetivo) {
+    public Pasajero(String nombre, int peso, int pisoActual, int pisoObjetivo) {
         this.nombre = nombre;
+        this.peso = peso;
         this.pisoActual = pisoActual;
         this.pisoObjetivo = pisoObjetivo;
         this.setName(nombre);

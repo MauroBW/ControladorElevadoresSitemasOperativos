@@ -2,6 +2,8 @@ package solucion;
 
 import solucion.Entidades.Elevador;
 import solucion.Entidades.Pasajero;
+import solucion.Entidades.LlamadosElevadoresManager;
+
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -11,20 +13,14 @@ import java.util.Queue;
 public class Main {
     public static void main(String[] args) {
 
-        List<Pasajero> listaPasajeros = new LinkedList<>();
+        LlamadosElevadoresManager manager = new LlamadosElevadoresManager();
 
-        listaPasajeros.add(new Pasajero("P1", 1,6));
-        listaPasajeros.add(new Pasajero("P2", 4,3));
-        listaPasajeros.add(new Pasajero("P3", 0,6));
-        listaPasajeros.add(new Pasajero("P4", 0,6));
+        manager.agregarPasajero("P1", 90, 1, 6);
+        manager.agregarPasajero("P2", 85,4, 3);
+        manager.agregarPasajero("P3", 100,0, 6);
+        manager.agregarPasajero("P4", 70, 0, 6);
 
-        // Despierto pasajeros
-        for (Pasajero pasajero : listaPasajeros) {
-            pasajero.start();
-        }
-
-        (new Elevador(1, "##1", listaPasajeros)).start();
-        (new Elevador(0, "##2", listaPasajeros)).start();
+        manager.iniciarElevadores();
 
     }
 }
