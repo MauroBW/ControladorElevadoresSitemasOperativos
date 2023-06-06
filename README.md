@@ -16,4 +16,5 @@ Run:
 ToDo:
 - Pasajero tiene que tener un tiempo. Momento en el cual realizará la llamada
 - Definir que es el balanceo de uso de elevadores
-- Terminar Logger
+- ~~Terminar Logger~~
+- Sacar logs dentro de elevador

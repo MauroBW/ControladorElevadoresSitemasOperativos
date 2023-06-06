@@ -1,5 +1,6 @@
 package solucion.Entidades;
 
+import solucion.Helpers.Helper;
 import solucion.Helpers.Logger;
 
 import java.util.ArrayList;
@@ -16,28 +17,26 @@ public class Elevador extends Thread {
     private static List<Pasajero> listaCompletaPasajeros;
     private List<Pasajero> candidatos = new ArrayList<>();
     private static Semaphore aceptarCliente = new Semaphore(1);
+    private static Semaphore log = new Semaphore(1);
     private int CAPACIDAD = 2;
-    private String identificadorLog;
-    private boolean primerAccesoLog = true;
-    private int tiempoAnterior = -1;
-
 
 
     public Elevador(int pisoActual,
                     String identificador,
-                    List<Pasajero> listaCompletaPasajeros, String identificadorLog) {
+                    List<Pasajero> listaCompletaPasajeros) {
         this.pisoActual = pisoActual;
         this.identificador = identificador;
         this.listaCompletaPasajeros = listaCompletaPasajeros;
-        this.identificadorLog = identificadorLog;
     }
 
     @Override
     public void run() {
         while (true) {
             try {
-                //registrarInfromacion();
-                timelineLog();
+                // Sincronizacion para Logger
+                log.acquire();
+                Logger.saveTimeLine(this);
+                log.release();
 
                 System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
 
@@ -231,7 +230,7 @@ public class Elevador extends Thread {
     }
 
     public String getTickRateMasID() {
-        return String.format("Elevador%s - Tiempo:%s", getIdentificador(), getTiempo());
+        return String.format("%s - Tiempo :%s", getIdentificador(), getTiempo());
     }
 
     public String mostrarInformacionPasajerosEnCabina() {
@@ -254,40 +253,18 @@ public class Elevador extends Thread {
         return informacionPasajeros;
     }
 
+    /**
+     * Informacion del elevador
+     * @return Devuelve String con toda la información del elevador
+     */
+    public String informacion() {
+        return String.format("[[ Elevador: %s , PisoActual: %s, Pasajeros: %s|]]\n", getTickRateMasID(), getPisoActual(), mostrarInformacionPasajerosEnCabina());
+    }
+
     public void registrarInfromacion() {
 
         new Logger().saveLog(getIdentificador() + "_Log.txt", String.format("[[ Elevador: %s , PisoActual: %s, Pasajeros: %s|]]\n", getTickRateMasID(), getPisoActual(), mostrarInformacionPasajerosEnCabina()));
         System.out.printf("[[ %s , PisoActual: %s, Pasajeros: %s|]]\n",
                 getTickRateMasID(), getPisoActual(), mostrarInformacionPasajerosEnCabina());
-    }
-
-
-    // Se logea por cada tiempo el estado de todo
-    public void timelineLog(){
-        int tiempoActual = getTiempo();
-
-        // Obtener la fecha y hora actual
-        Date fechaActual = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-        String fechaFormateada = dateFormat.format(fechaActual);
-        String nombreArchivo = "log_" + fechaFormateada + "_" + this.identificadorLog + ".txt";
-
-        String logLine = "";
-
-        if(primerAccesoLog){ // El primero en acceder
-            logLine += String.format("Tiempo %d\n", tiempoActual);
-            primerAccesoLog = false;
-        }
-
-
-        if (tiempoActual!=tiempoAnterior) { //Hubo cambio de tiempo
-            primerAccesoLog = true;
-            tiempoAnterior = tiempoActual;
-        }
-
-        logLine += String.format("[[ Elevador: %s , PisoActual: %s, Pasajeros: %s|]]\n", tiempoActual, getPisoActual(), mostrarInformacionPasajerosEnCabina());
-
-        new Logger().saveLog(nombreArchivo, logLine);
-
     }
 }

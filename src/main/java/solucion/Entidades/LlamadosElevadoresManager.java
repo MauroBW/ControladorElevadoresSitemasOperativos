@@ -7,15 +7,13 @@ import java.util.List;
 import java.util.Random;
 
 public class LlamadosElevadoresManager {
-    private List<Pasajero> listaPasajeros;
-    private String identificadorLog;
+    private static List<Pasajero> listaPasajeros;
 
     public LlamadosElevadoresManager() {
         listaPasajeros = new LinkedList<>();
-        this.identificadorLog = generarIdentificador();
     }
 
-    public void agregarPasajero(String nombre, int peso, int pisoOrigen, int pisoDestino) {
+    public static void agregarPasajero(String nombre, int peso, int pisoOrigen, int pisoDestino) {
         Pasajero pasajero = new Pasajero(nombre, peso, pisoOrigen, pisoDestino);
         /*
 
@@ -31,28 +29,10 @@ public class LlamadosElevadoresManager {
             pasajero.start();
         }
 
-        Elevador elevador1 = new Elevador(1, "##1", listaPasajeros, this.identificadorLog);
+        Elevador elevador1 = new Elevador(1, "##1", listaPasajeros);
         elevador1.start();
 
-        Elevador elevador2 = new Elevador(0, "##2", listaPasajeros, this.identificadorLog);
+        Elevador elevador2 = new Elevador(0, "##2", listaPasajeros);
         elevador2.start();
-    }
-
-
-    //Se genera identificador para diferenciar los logs
-    public String generarIdentificador() {
-        Date fechaActual = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-        String fechaFormateada = dateFormat.format(fechaActual);
-        String nombreArchivo = "log_" + fechaFormateada + "_" + this.identificadorLog + ".txt";
-
-        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        StringBuilder sb = new StringBuilder(6);
-        Random random = new Random();
-        for (int i = 0; i < 6; i++) {
-            int index = random.nextInt(caracteres.length());
-            sb.append(caracteres.charAt(index));
-        }
-        return sb.toString();
     }
 }
