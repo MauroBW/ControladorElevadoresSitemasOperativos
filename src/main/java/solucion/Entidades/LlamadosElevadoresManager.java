@@ -1,5 +1,7 @@
 package solucion.Entidades;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -39,6 +41,11 @@ public class LlamadosElevadoresManager {
 
     //Se genera identificador para diferenciar los logs
     public String generarIdentificador() {
+        Date fechaActual = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        String fechaFormateada = dateFormat.format(fechaActual);
+        String nombreArchivo = "log_" + fechaFormateada + "_" + this.identificadorLog + ".txt";
+        
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         StringBuilder sb = new StringBuilder(6);
         Random random = new Random();
