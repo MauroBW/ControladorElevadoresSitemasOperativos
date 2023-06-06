@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 
 public class Elevador extends Thread {
     private int pisoActual;
@@ -19,6 +18,10 @@ public class Elevador extends Thread {
     private static Semaphore aceptarCliente = new Semaphore(1);
     private int CAPACIDAD = 2;
     private String identificadorLog;
+    private boolean primerAccesoLog = true;
+    private int tiempoAnterior = -1;
+
+
 
     public Elevador(int pisoActual,
                     String identificador,
@@ -33,7 +36,7 @@ public class Elevador extends Thread {
     public void run() {
         while (true) {
             try {
-                registrarInfromacion();
+                //registrarInfromacion();
                 timelineLog();
 
                 System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
@@ -267,12 +270,24 @@ public class Elevador extends Thread {
         Date fechaActual = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         String fechaFormateada = dateFormat.format(fechaActual);
-
         String nombreArchivo = "log_" + fechaFormateada + "_" + this.identificadorLog + ".txt";
-        new Logger().saveLog(nombreArchivo, String.format("[[ Elevador: %s , PisoActual: %s, Pasajeros: %s|]]\n", tiempoActual, getPisoActual(), mostrarInformacionPasajerosEnCabina()));
+
+        String logLine = "";
+
+        if(primerAccesoLog){ // El primero en acceder
+            logLine += String.format("Tiempo %d\n", tiempoActual);
+            primerAccesoLog = false;
+        }
+
+
+        if (tiempoActual!=tiempoAnterior) { //Hubo cambio de tiempo
+            primerAccesoLog = true;
+            tiempoAnterior = tiempoActual;
+        }
+
+        logLine += String.format("[[ Elevador: %s , PisoActual: %s, Pasajeros: %s|]]\n", tiempoActual, getPisoActual(), mostrarInformacionPasajerosEnCabina());
+
+        new Logger().saveLog(nombreArchivo, logLine);
 
     }
-
-
-
 }

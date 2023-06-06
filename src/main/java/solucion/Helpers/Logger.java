@@ -70,11 +70,12 @@ public class Logger {
     }
 
     public void saveLog(String fileName, String text) {
+        String rutaAGuardar = "logs/" + fileName; // Se guarda en carpeta logs
         try {
-            FileWriter writer = new FileWriter(fileName, true);
+            FileWriter writer = new FileWriter(rutaAGuardar, true);
             writer.write(text);
             writer.close();
-//            System.out.println("El string se ha escrito en el archivo correctamente.");
+            // System.out.println("El string se ha escrito en el archivo correctamente.");
         } catch (Exception e) {
             System.out.println("Ha ocurrido un error al escribir el archivo.");
             e.printStackTrace();

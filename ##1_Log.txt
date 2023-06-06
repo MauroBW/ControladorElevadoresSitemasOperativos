@@ -174,3 +174,11 @@ Elevador##1 - Tiempo:5 ~BAJAN~| Nombre: P1, PisoObjetivo: 6
 [[ Elevador: Elevador##1 - Tiempo:1 , PisoActual: 1, Pasajeros: | Nombre: P1, PisoObjetivo: 6 |]]
 [[ Elevador: Elevador##1 - Tiempo:2 , PisoActual: 2, Pasajeros: | Nombre: P1, PisoObjetivo: 6 |]]
 [[ Elevador: Elevador##1 - Tiempo:3 , PisoActual: 3, Pasajeros: | Nombre: P1, PisoObjetivo: 6 |]]
+[[ Elevador: Elevador##1 - Tiempo:0 , PisoActual: 1, Pasajeros: |]]
+[[ Elevador: Elevador##1 - Tiempo:1 , PisoActual: 1, Pasajeros: | Nombre: P1, PisoObjetivo: 6 |]]
+[[ Elevador: Elevador##1 - Tiempo:2 , PisoActual: 2, Pasajeros: | Nombre: P1, PisoObjetivo: 6 |]]
+[[ Elevador: Elevador##1 - Tiempo:3 , PisoActual: 3, Pasajeros: | Nombre: P1, PisoObjetivo: 6 |]]
+[[ Elevador: Elevador##1 - Tiempo:4 , PisoActual: 4, Pasajeros: | Nombre: P1, PisoObjetivo: 6 |]]
+[[ Elevador: Elevador##1 - Tiempo:5 , PisoActual: 5, Pasajeros: | Nombre: P1, PisoObjetivo: 6 |]]
+Elevador##1 - Tiempo:5 ~BAJAN~| Nombre: P1, PisoObjetivo: 6 
+[[ Elevador: Elevador##1 - Tiempo:6 , PisoActual: 6, Pasajeros: |]]
