@@ -69,7 +69,7 @@ public class Logger {
 
     }
 
-    public void saveLog(String fileName, String text) {
+    public static void saveLog(String fileName, String text) {
         String rutaAGuardar = "logs/" + fileName; // Se guarda en carpeta logs
         try {
             FileWriter writer = new FileWriter(rutaAGuardar, true);
