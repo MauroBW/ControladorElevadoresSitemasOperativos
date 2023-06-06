@@ -9,7 +9,6 @@ import java.util.concurrent.Semaphore;
 
 public class LlamadosElevadoresManager {
     private static List<Pasajero> listaPasajeros = new LinkedList<>();
-    private String identificadorLog;
 
     public LlamadosElevadoresManager() {
     }
@@ -29,7 +28,7 @@ public class LlamadosElevadoresManager {
         listaPasajeros.add(pasajero);
     }
 
-    public void iniciarElevadores() {
+    public static void iniciarElevadores() {
         for (Pasajero pasajero : listaPasajeros) {
             pasajero.start();
         }
