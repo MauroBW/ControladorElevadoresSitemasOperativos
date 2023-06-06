@@ -14,8 +14,7 @@ import java.util.Queue;
 
 public class Main {
     public static void main(String[] args) {
-
-
+        
         System.out.println(Helper.generarIdentificador());
         Logger.saveLog("Hola.txt", "Hola Mundo");
 //        LlamadosElevadoresManager manager = new LlamadosElevadoresManager();
