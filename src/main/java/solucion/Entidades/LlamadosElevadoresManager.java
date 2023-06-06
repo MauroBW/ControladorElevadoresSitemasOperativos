@@ -3,14 +3,20 @@ package solucion.Entidades;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 public class LlamadosElevadoresManager {
-    private List<Pasajero> listaPasajeros;
+    private static List<Pasajero> listaPasajeros = new LinkedList<>();
     private String identificadorLog;
 
+    private Semaphore guardarPasajero = new Semaphore(1);
+
     public LlamadosElevadoresManager() {
-        listaPasajeros = new LinkedList<>();
         this.identificadorLog = generarIdentificador();
+    }
+
+    public void agregarPasajero(Pasajero pasajero) {
+        listaPasajeros.add(pasajero);
     }
 
     public void agregarPasajero(String nombre, int peso, int pisoOrigen, int pisoDestino) {
@@ -21,7 +27,12 @@ public class LlamadosElevadoresManager {
             A su vez esta clase debe controlar o saber el tiempo, ya que a cada cambio de tiempo se debe reordenar la lista.
 
          */
-        listaPasajeros.add(pasajero);
+        try {
+            guardarPasajero.acquire();
+            listaPasajeros.add(pasajero);
+            guardarPasajero.release();
+        } catch (Exception e) {e.printStackTrace(); }
+
     }
 
     public void iniciarElevadores() {
