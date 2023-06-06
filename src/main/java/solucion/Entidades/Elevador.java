@@ -97,16 +97,6 @@ public class Elevador extends Thread {
         return obtenerPasajeroMasCercano(listaCompletaPasajeros);
     }
 
-    public void movimientoHaciaCliente(int pisoActualCliente) {
-        if (pisoActualCliente < getPisoActual()) {
-            desplazamiento("BAJAR");
-        } else if (pisoActualCliente > getPisoActual()) {
-            desplazamiento("SUBIR");
-        } else {
-            System.out.println(getIdentificador() + "Llegue a cliente");
-        }
-    }
-
     /**
      * Realiza movimiento del Elevador hacia objetivo
      * @param pisoObjetivo:
@@ -262,7 +252,6 @@ public class Elevador extends Thread {
     }
 
     public void registrarInfromacion() {
-
         new Logger().saveLog(getIdentificador() + "_Log.txt", String.format("[[ Elevador: %s , PisoActual: %s, Pasajeros: %s|]]\n", getTickRateMasID(), getPisoActual(), mostrarInformacionPasajerosEnCabina()));
         System.out.printf("[[ %s , PisoActual: %s, Pasajeros: %s|]]\n",
                 getTickRateMasID(), getPisoActual(), mostrarInformacionPasajerosEnCabina());
