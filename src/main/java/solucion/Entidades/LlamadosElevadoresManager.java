@@ -45,7 +45,7 @@ public class LlamadosElevadoresManager {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         String fechaFormateada = dateFormat.format(fechaActual);
         String nombreArchivo = "log_" + fechaFormateada + "_" + this.identificadorLog + ".txt";
-        
+
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         StringBuilder sb = new StringBuilder(6);
         Random random = new Random();
