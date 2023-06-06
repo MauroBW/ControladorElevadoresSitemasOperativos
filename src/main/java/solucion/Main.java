@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import solucion.Entidades.Elevador;
 import solucion.Entidades.Pasajero;
 import solucion.Entidades.LlamadosElevadoresManager;
+import solucion.Helpers.Helper;
+import solucion.Helpers.Logger;
 
 
 import java.util.ArrayList;
@@ -15,7 +17,9 @@ import java.util.Queue;
 @SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-
+        
+        System.out.println(Helper.generarIdentificador());
+        Logger.saveLog("Hola.txt", "Hola Mundo");
         LlamadosElevadoresManager manager = new LlamadosElevadoresManager();
         SpringApplication.run(Main.class, args);
         List<Pasajero> listaPasajeros = new LinkedList<>();

@@ -1,17 +1,24 @@
 package solucion.Entidades;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 public class LlamadosElevadoresManager {
+<<<<<<< HEAD
     private static List<Pasajero> listaPasajeros = new LinkedList<>();
     private String identificadorLog;
+=======
+    private static List<Pasajero> listaPasajeros;
+>>>>>>> main
 
     private Semaphore guardarPasajero = new Semaphore(1);
 
     public LlamadosElevadoresManager() {
+<<<<<<< HEAD
         this.identificadorLog = generarIdentificador();
     }
 
@@ -20,6 +27,12 @@ public class LlamadosElevadoresManager {
     }
 
     public void agregarPasajero(String nombre, int peso, int pisoOrigen, int pisoDestino) {
+=======
+        listaPasajeros = new LinkedList<>();
+    }
+
+    public static void agregarPasajero(String nombre, int peso, int pisoOrigen, int pisoDestino) {
+>>>>>>> main
         Pasajero pasajero = new Pasajero(nombre, peso, pisoOrigen, pisoDestino);
         /*
 
@@ -40,23 +53,10 @@ public class LlamadosElevadoresManager {
             pasajero.start();
         }
 
-        Elevador elevador1 = new Elevador(1, "##1", listaPasajeros, this.identificadorLog);
+        Elevador elevador1 = new Elevador(1, "##1", listaPasajeros);
         elevador1.start();
 
-        Elevador elevador2 = new Elevador(0, "##2", listaPasajeros, this.identificadorLog);
+        Elevador elevador2 = new Elevador(0, "##2", listaPasajeros);
         elevador2.start();
-    }
-
-
-    //Se genera identificador para diferenciar los logs
-    public String generarIdentificador() {
-        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        StringBuilder sb = new StringBuilder(6);
-        Random random = new Random();
-        for (int i = 0; i < 6; i++) {
-            int index = random.nextInt(caracteres.length());
-            sb.append(caracteres.charAt(index));
-        }
-        return sb.toString();
     }
 }

@@ -16,3 +16,9 @@ API:
   "pisoActual": 3,
   "pisoObjetivo": 7
   }
+
+ToDo:
+- Pasajero tiene que tener un tiempo. Momento en el cual realizará la llamada
+- Definir que es el balanceo de uso de elevadores
+- ~~Terminar Logger~~
+- Sacar logs dentro de elevador
