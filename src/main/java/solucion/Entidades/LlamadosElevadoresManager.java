@@ -13,7 +13,7 @@ public class LlamadosElevadoresManager {
     public LlamadosElevadoresManager() {
     }
 
-    public void agregarPasajero(Pasajero pasajero) {
+    public static void agregarPasajero(Pasajero pasajero) {
         listaPasajeros.add(pasajero);
     }
 
