@@ -13,6 +13,7 @@ API:
 - Pasajeros path: http://localhost:8080/pasajero
 - Body: {
   "nombre": "Juan",
+  "peso": 80,
   "pisoActual": 3,
   "pisoObjetivo": 7
   }
