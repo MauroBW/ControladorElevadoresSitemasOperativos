@@ -12,11 +12,13 @@ public class PasajerosController {
 
     @PostMapping("/pasajero")
     public ResponseEntity<String> crearPersona(@RequestBody List<Pasajero> pasajeros) {
-        for(Pasajero nuevoPasajero: pasajeros) {
-            LlamadosElevadoresManager.agregarPasajero(nuevoPasajero);
-            System.out.printf("API :: Nombre: %s | Peso: %s | PisoActual: %s | PisoObjetivo%s\n",
-                    nuevoPasajero.getNombre(), nuevoPasajero.getPeso(), nuevoPasajero.getPisoActual(), nuevoPasajero.getPisoObjetivo());
-        }
+        try{
+            for(Pasajero nuevoPasajero: pasajeros) {
+                LlamadosElevadoresManager.agregarPasajero(nuevoPasajero);
+                System.out.printf("API :: Nombre: %s | Peso: %s | PisoActual: %s | PisoObjetivo%s\n",
+                        nuevoPasajero.getNombre(), nuevoPasajero.getPeso(), nuevoPasajero.getPisoActual(), nuevoPasajero.getPisoObjetivo());
+            }
+        } catch (Exception e) {}
         return ResponseEntity.ok("Persona creada con éxito");
     }
 }

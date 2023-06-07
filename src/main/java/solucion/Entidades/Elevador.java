@@ -20,7 +20,6 @@ public class Elevador extends Thread {
     private static Semaphore log = new Semaphore(1);
     private int CAPACIDAD = 2;
 
-
     public Elevador(int pisoActual,
                     String identificador,
                     List<Pasajero> listaCompletaPasajeros) {
@@ -46,7 +45,7 @@ public class Elevador extends Thread {
                     bajarClientes();
                 } else {
                     if(!listaCompletaPasajeros.isEmpty()){
-                        if (pasajerosActuales.size() < CAPACIDAD) {
+                        if (pasajerosActuales.size() <= CAPACIDAD) {
                             aceptarCliente.acquire();
 
                             Pasajero aux = procesarNuevoPedido(); // Obtiene pedido mas cercano de listaCompletaPasajeros
