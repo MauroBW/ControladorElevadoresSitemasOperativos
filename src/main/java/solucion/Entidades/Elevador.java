@@ -1,14 +1,9 @@
 package solucion.Entidades;
 
-import solucion.Helpers.Helper;
 import solucion.Helpers.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Elevador extends Thread {
     private int pisoActual;
@@ -86,11 +81,10 @@ public class Elevador extends Thread {
         }
     }
 
-    /*
-     * 
-     * Getteres y setters
-     * 
-     */
+    /********************************************************************************
+     * Inicio Getters, setters y funciones aux
+     ********************************************************************************/
+
     public String getIdentificador() {
         return identificador;
     }
@@ -110,10 +104,6 @@ public class Elevador extends Thread {
         return pasajerosActuales;
     }
 
-    public void tick() {
-        tiempo++;
-    }
-
     public int getTiempo() {
         return tiempo;
     }
@@ -122,12 +112,24 @@ public class Elevador extends Thread {
         return String.format("%s - Tiempo :%s", getIdentificador(), getTiempo());
     }
 
-    private void subirPasajero(Pasajero aux) {
-        this.pasajerosActuales.add(aux);
+    public void tick() {
+        tiempo++;
     }
 
     public Pasajero procesarNuevoPedido() {
         return obtenerPasajeroMasCercano(listaCompletaPasajeros);
+    }
+
+    /********************************************************************************
+     * Fin Getters, setters y funciones aux
+     ********************************************************************************/
+
+    /********************************************************************************
+     * Inicio lógica y operaciones
+     ********************************************************************************/
+
+    private void subirPasajero(Pasajero aux) {
+        this.pasajerosActuales.add(aux);
     }
 
     /**
@@ -251,6 +253,14 @@ public class Elevador extends Thread {
         }
     }
 
+    /********************************************************************************
+     * Fin lógica y operaciones
+     ********************************************************************************/
+
+    /********************************************************************************
+     * Inicio registros - información
+     ********************************************************************************/
+
     public String mostrarInformacionPasajerosEnCabina() {
         String informacionPasajeros = "";
 
@@ -280,4 +290,8 @@ public class Elevador extends Thread {
         return String.format("[[ Elevador: %s , Piso Actual: %s, Sentido: %s, Pasajeros: %s|]]\n", getTickRateMasID(),
                 getPisoActual(), getSentido(), mostrarInformacionPasajerosEnCabina());
     }
+
+    /********************************************************************************
+     * Fin registros - información
+     ********************************************************************************/
 }
