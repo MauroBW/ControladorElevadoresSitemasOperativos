@@ -20,10 +20,9 @@ public class Elevador extends Thread {
     private static Semaphore log = new Semaphore(1);
     private int CAPACIDAD = 2;
 
-
     public Elevador(int pisoActual,
-                    String identificador,
-                    List<Pasajero> listaCompletaPasajeros) {
+            String identificador,
+            List<Pasajero> listaCompletaPasajeros) {
         this.pisoActual = pisoActual;
         this.identificador = identificador;
         this.listaCompletaPasajeros = listaCompletaPasajeros;
@@ -35,31 +34,32 @@ public class Elevador extends Thread {
             try {
                 // Sincronizacion para Logger
                 log.acquire();
-                Logger.saveTimeLine(this);
+                Logger.crearLogs(this);
+
                 log.release();
 
                 System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
-
 
                 if (!pasajerosActuales.isEmpty()) {
                     comenzarMovimiento(obtenerObjetivoMasCercano(pasajerosActuales).getPisoObjetivo());
                     bajarClientes();
                 } else {
-                    if(!listaCompletaPasajeros.isEmpty()){
+                    if (!listaCompletaPasajeros.isEmpty()) {
                         if (pasajerosActuales.size() < CAPACIDAD) {
                             aceptarCliente.acquire();
 
-                            Pasajero aux = procesarNuevoPedido(); // Obtiene pedido mas cercano de listaCompletaPasajeros
+                            Pasajero aux = procesarNuevoPedido(); // Obtiene pedido mas cercano de
+                                                                  // listaCompletaPasajeros
                             candidatos.add(aux);
                             listaCompletaPasajeros.remove(aux);
 
                             aceptarCliente.release();
                         }
                     }
-                    if(!candidatos.isEmpty()) {
+                    if (!candidatos.isEmpty()) {
                         Pasajero clienteCandidato = obtenerPasajeroMasCercano(candidatos);
                         comenzarMovimiento(clienteCandidato.getPisoActual());
-                        if(clienteCandidato.getPisoActual() == getPisoActual()) {
+                        if (clienteCandidato.getPisoActual() == getPisoActual()) {
                             subirPasajero(clienteCandidato);
                             System.out.println("Llegue a candidato");
                             candidatos.remove(clienteCandidato);
@@ -67,8 +67,8 @@ public class Elevador extends Thread {
                     }
                 }
 
-                if(pasajerosActuales.isEmpty() && listaCompletaPasajeros.isEmpty() && candidatos.isEmpty()) {
-//                    throw new RuntimeException("Ejecucion terminada");
+                if (pasajerosActuales.isEmpty() && listaCompletaPasajeros.isEmpty() && candidatos.isEmpty()) {
+                    // throw new RuntimeException("Ejecucion terminada");
                     comenzarMovimiento(0);
                 }
 
@@ -99,9 +99,10 @@ public class Elevador extends Thread {
 
     /**
      * Realiza movimiento del Elevador hacia objetivo
+     * 
      * @param pisoObjetivo:
-     *  - Si pisoObjetivo es menor a pisoActual, entonces Bajo
-     *  - Si pisoObjetivo es mayor a pisoActual, entonces Subo
+     *                      - Si pisoObjetivo es menor a pisoActual, entonces Bajo
+     *                      - Si pisoObjetivo es mayor a pisoActual, entonces Subo
      */
     public void comenzarMovimiento(int pisoObjetivo) {
         if (pisoObjetivo < getPisoActual()) {
@@ -114,7 +115,8 @@ public class Elevador extends Thread {
     }
 
     /**
-     * Recorre la lista de pasajerosActuales y baja a los que coincidan en pisoObjetivo
+     * Recorre la lista de pasajerosActuales y baja a los que coincidan en
+     * pisoObjetivo
      * Con pisoActual del Elevador
      */
     public void bajarClientes() {
@@ -125,7 +127,7 @@ public class Elevador extends Thread {
                     pasajerosParaEliminar.add(pasajero);
                 }
             }
-            if (!pasajerosParaEliminar.isEmpty()){
+            if (!pasajerosParaEliminar.isEmpty()) {
                 Logger.saveLog(getIdentificador() + "_LogPasajeros.txt", mostrarInformacion(pasajerosParaEliminar));
             }
 
@@ -136,6 +138,7 @@ public class Elevador extends Thread {
 
     /**
      * Devuelve el pasajero cuyo pisoActual es el más cercano al elevador
+     * 
      * @param listaPasajeros
      * @return
      */
@@ -159,6 +162,7 @@ public class Elevador extends Thread {
 
     /**
      * Devuelve el Pasajero que tiene el pisoObjetivo más cercano al elevador
+     * 
      * @param listaPasajeros
      * @return Pasajero con pisoObjetivo mas cercano
      */
@@ -192,6 +196,7 @@ public class Elevador extends Thread {
 
     /**
      * Sube o Baja una unidad dependiendo del sentido de navegaciín
+     * 
      * @param sentido: Sentido para la navegación
      */
     public void desplazamiento(String sentido) {
@@ -212,7 +217,7 @@ public class Elevador extends Thread {
     }
 
     public void tick() {
-        tiempo ++;
+        tiempo++;
     }
 
     public int getTiempo() {
@@ -245,9 +250,11 @@ public class Elevador extends Thread {
 
     /**
      * Informacion del elevador
+     * 
      * @return Devuelve String con toda la información del elevador
      */
     public String informacion() {
-        return String.format("[[ Elevador: %s , PisoActual: %s, Pasajeros: %s|]]\n", getTickRateMasID(), getPisoActual(), mostrarInformacionPasajerosEnCabina());
+        return String.format("[[ Elevador: %s , PisoActual: %s, Pasajeros: %s|]]\n", getTickRateMasID(),
+                getPisoActual(), mostrarInformacionPasajerosEnCabina());
     }
 }
