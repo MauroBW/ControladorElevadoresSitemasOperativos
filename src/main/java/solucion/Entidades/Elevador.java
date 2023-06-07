@@ -122,11 +122,12 @@ public class Elevador extends Thread {
             List<Pasajero> pasajerosParaEliminar = new ArrayList<>();
             for (Pasajero pasajero : getPasajerosActuales()) {
                 if (pasajero.getPisoObjetivo() == getPisoActual()) {
+                    pasajero.setPisoActual(getPisoActual());
                     pasajerosParaEliminar.add(pasajero);
                 }
             }
             if (!pasajerosParaEliminar.isEmpty()){
-                Logger.saveLog(getIdentificador() + "_LogPasajeros.txt", mostrarInformacion(pasajerosParaEliminar));
+                Logger.saveLog("LogPasajeros.txt", mostrarInformacion(pasajerosParaEliminar));
             }
 
             System.out.println("Se bajan los pasajeros: " + mostrarInformacion(pasajerosParaEliminar));
@@ -207,6 +208,9 @@ public class Elevador extends Thread {
         }
     }
 
+    /**
+     * @return Lista de pasajeros dentro del elevador
+     */
     public List<Pasajero> getPasajerosActuales() {
         return pasajerosActuales;
     }
