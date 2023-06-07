@@ -32,6 +32,7 @@ public class Elevador extends Thread {
     public void run() {
         while (true) {
             try {
+                LlamadosElevadoresManager.updateListaPedidos(getTiempo());
                 // Sincronizacion para Logger
                 log.acquire();
                 Logger.saveTimeLine(this);
