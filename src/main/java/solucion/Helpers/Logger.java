@@ -11,7 +11,7 @@ public class Logger {
     public static int instante = 0;
     public static final String identificador = Helper.generarIdentificador();
     public static final String LOG_GENERAL = "LogGeneral_" + identificador + ".txt";
-    public static final String LOG_ELEVADOR = "LogElevador_" + identificador + ".txt";
+    public static final String LOG_ELEVADOR = "_LogElevador_" + identificador + ".txt";
 
     public Logger() {
 
@@ -59,6 +59,5 @@ public class Logger {
         // Llama a los logs
         saveTimeLine(elevador);
         saveElevadorLog(elevador);
-
     }
 }
