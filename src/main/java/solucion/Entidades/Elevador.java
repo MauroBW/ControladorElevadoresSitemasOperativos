@@ -32,6 +32,7 @@ public class Elevador extends Thread {
     public void run() {
         while (true) {
             try {
+                LlamadosElevadoresManager.updateListaPedidos(getTiempo());
 
                 System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
 
