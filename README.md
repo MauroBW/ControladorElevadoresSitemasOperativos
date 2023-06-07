@@ -19,7 +19,10 @@ API:
   }
 
 ToDo:
-- Pasajero tiene que tener un tiempo. Momento en el cual realizará la llamada
+- Pasajero tiene que tener un tiempo. Momento en el cual realizará la llamada (LlamadosElevadoresManager)
 - Definir que es el balanceo de uso de elevadores
-- ~~Terminar Logger~~
 - Sacar logs dentro de elevador
+- Actualizar el piso Actual de los pasajeros en cada movimiento del elevador (Elevador)
+
+Done:
+- ~~Terminar Logger~~

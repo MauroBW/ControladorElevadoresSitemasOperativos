@@ -126,7 +126,7 @@ public class Elevador extends Thread {
                 }
             }
             if (!pasajerosParaEliminar.isEmpty()){
-                new Logger().saveLog(getIdentificador() + "_Log.txt", mostrarInformacion(pasajerosParaEliminar));
+                Logger.saveLog(getIdentificador() + "_LogPasajeros.txt", mostrarInformacion(pasajerosParaEliminar));
             }
 
             System.out.println("Se bajan los pasajeros: " + mostrarInformacion(pasajerosParaEliminar));
@@ -249,11 +249,5 @@ public class Elevador extends Thread {
      */
     public String informacion() {
         return String.format("[[ Elevador: %s , PisoActual: %s, Pasajeros: %s|]]\n", getTickRateMasID(), getPisoActual(), mostrarInformacionPasajerosEnCabina());
-    }
-
-    public void registrarInfromacion() {
-        new Logger().saveLog(getIdentificador() + "_Log.txt", String.format("[[ Elevador: %s , PisoActual: %s, Pasajeros: %s|]]\n", getTickRateMasID(), getPisoActual(), mostrarInformacionPasajerosEnCabina()));
-        System.out.printf("[[ %s , PisoActual: %s, Pasajeros: %s|]]\n",
-                getTickRateMasID(), getPisoActual(), mostrarInformacionPasajerosEnCabina());
     }
 }

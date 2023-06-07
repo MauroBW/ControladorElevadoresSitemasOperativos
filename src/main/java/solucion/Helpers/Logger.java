@@ -17,7 +17,7 @@ public class Logger {
     }
 
     public static void saveTimeLine(Elevador elevador) {
-        String tiempoActual = instante + "\n";
+        String tiempoActual = String.format("\nInstante: %s\n", instante);
         String informacion = elevador.informacion();
         if(elevador.getTiempo() == instante) {
             saveLog(LOG_GENERAL, tiempoActual + informacion);
