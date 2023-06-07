@@ -34,7 +34,7 @@ public class Pasajero extends Thread {
             try {
                 Thread.sleep(1000);
             } catch (Exception e) { }
-            new Logger().saveLog("##pasajeros_Log.txt", String.format("{ Nombre: %s \nTiempo: %s \nPisoObjetivo: %s \nPisoActual: %s \n}\n",
+            Logger.saveLog("##pasajeros_Log.txt", String.format("{ Nombre: %s Tiempo: %s || PisoObjetivo: %s PisoActual: %s }\n",
                     getNombre(), getTiempo(), getPisoObjetivo(), getPisoActual()));
         }
     }
