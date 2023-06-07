@@ -18,7 +18,7 @@ import java.util.Queue;
 public class Main {
     public static void main(String[] args) {
 
-//        SpringApplication.run(Main.class, args); // Si se quiere levantar la api, descomentar linea
+        SpringApplication.run(Main.class, args); // Si se quiere levantar la api, descomentar linea
 
         List<Pasajero> listaPasajeros = new LinkedList<>();
 
