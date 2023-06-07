@@ -86,10 +86,11 @@ public class Elevador extends Thread {
         }
     }
 
-    private void subirPasajero(Pasajero aux) {
-        this.pasajerosActuales.add(aux);
-    }
-
+    /*
+     * 
+     * Getteres y setters
+     * 
+     */
     public String getIdentificador() {
         return identificador;
     }
@@ -100,6 +101,29 @@ public class Elevador extends Thread {
 
     public String getSentido() {
         return sentido;
+    }
+
+    /**
+     * @return Lista de pasajeros dentro del elevador
+     */
+    public List<Pasajero> getPasajerosActuales() {
+        return pasajerosActuales;
+    }
+
+    public void tick() {
+        tiempo++;
+    }
+
+    public int getTiempo() {
+        return tiempo;
+    }
+
+    public String getTickRateMasID() {
+        return String.format("%s - Tiempo :%s", getIdentificador(), getTiempo());
+    }
+
+    private void subirPasajero(Pasajero aux) {
+        this.pasajerosActuales.add(aux);
     }
 
     public Pasajero procesarNuevoPedido() {
@@ -225,25 +249,6 @@ public class Elevador extends Thread {
                 this.pisoActual--;
                 break;
         }
-    }
-
-    /**
-     * @return Lista de pasajeros dentro del elevador
-     */
-    public List<Pasajero> getPasajerosActuales() {
-        return pasajerosActuales;
-    }
-
-    public void tick() {
-        tiempo++;
-    }
-
-    public int getTiempo() {
-        return tiempo;
-    }
-
-    public String getTickRateMasID() {
-        return String.format("%s - Tiempo :%s", getIdentificador(), getTiempo());
     }
 
     public String mostrarInformacionPasajerosEnCabina() {
