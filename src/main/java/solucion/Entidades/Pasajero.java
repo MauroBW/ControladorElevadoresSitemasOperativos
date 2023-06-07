@@ -5,17 +5,19 @@ import solucion.Helpers.Logger;
 public class Pasajero extends Thread {
 
     public int tiempo = 0;
+    public int tiempoInicio;
     public String nombre;
     public int peso;
     public int pisoActual;
     public int pisoObjetivo;
 
-    public Pasajero(String nombre, int peso, int pisoActual, int pisoObjetivo) {
+    public Pasajero(String nombre, int peso, int pisoActual, int pisoObjetivo, int tiempoInicio) {
         this.nombre = nombre;
         this.peso = peso;
         this.pisoActual = pisoActual;
         this.pisoObjetivo = pisoObjetivo;
-        this.setName(nombre);
+        this.tiempoInicio = tiempoInicio;
+        this.setName(nombre); // Setea el nombre para el hilo
     }
 
     public Pasajero() {
@@ -65,5 +67,9 @@ public class Pasajero extends Thread {
 
     public void setPisoActual(int pisoActual) {
         this.pisoActual = pisoActual;
+    }
+
+    public int getTiempoInicio() {
+        return tiempoInicio;
     }
 }

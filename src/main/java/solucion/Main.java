@@ -18,15 +18,15 @@ import java.util.Queue;
 public class Main {
     public static void main(String[] args) {
 
-        SpringApplication.run(Main.class, args); // Si se quiere levantar la api, descomentar linea
+//        SpringApplication.run(Main.class, args); // Si se quiere levantar la api, descomentar linea
 
         List<Pasajero> listaPasajeros = new LinkedList<>();
 
-        LlamadosElevadoresManager.agregarPasajero("P1", 90, 1, 6);
-        LlamadosElevadoresManager.agregarPasajero("P2", 90, 1, 6);
-        LlamadosElevadoresManager.agregarPasajero("P3", 85,4, 3);
-        LlamadosElevadoresManager.agregarPasajero("P4", 100,0, 6);
-        LlamadosElevadoresManager.agregarPasajero("P5", 70, 0, 6);
+        LlamadosElevadoresManager.agregarPasajero("P1", 90, 1, 6,0);
+        LlamadosElevadoresManager.agregarPasajero("P2", 90, 1, 6, 20);
+        LlamadosElevadoresManager.agregarPasajero("P3", 85,4, 3, 20);
+        LlamadosElevadoresManager.agregarPasajero("P4", 100,0, 6, 20);
+        LlamadosElevadoresManager.agregarPasajero("P5", 70, 0, 6, 20);
 
         LlamadosElevadoresManager.iniciarElevadores();
 
