@@ -46,7 +46,7 @@ public class LlamadosElevadoresManager {
             pasajero.start();
         }
 
-        Elevador elevador1 = new Elevador(1, "##1", listaPasajeros);
+        Elevador elevador1 = new Elevador(0, "##1", listaPasajeros);
         elevador1.start();
 
         Elevador elevador2 = new Elevador(0, "##2", listaPasajeros);

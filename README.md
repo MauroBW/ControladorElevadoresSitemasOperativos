@@ -15,14 +15,16 @@ API:
   "nombre": "Juan",
   "peso": 80,
   "pisoActual": 3,
-  "pisoObjetivo": 7
+  "pisoObjetivo": 7,
+  "tiempoInicio": 10
   }
 
 ToDo:
-- Pasajero tiene que tener un tiempo. Momento en el cual realizará la llamada (LlamadosElevadoresManager)
 - Definir que es el balanceo de uso de elevadores
 - Sacar logs dentro de elevador
 - Actualizar el piso Actual de los pasajeros en cada movimiento del elevador (Elevador)
+- Elevador debe levantar mas pasajeros por piso
 
 Done:
 - ~~Terminar Logger~~
+~~- Pasajero tiene que tener un tiempo. Momento en el cual realizará la llamada (LlamadosElevadoresManager)~~
