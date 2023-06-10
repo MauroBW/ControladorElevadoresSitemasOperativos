@@ -29,15 +29,17 @@ public class Pasajero extends Thread {
         while (true) {
             tick();
 
-            if (getPisoActual() == getPisoObjetivo()) {
-                System.out.println("Me Bajo!!");
-            }
+            // if (getPisoActual() == getPisoObjetivo()) {
+            // System.out.println("Me Bajo!!");
+            // }
 
             try {
                 Thread.sleep(1000);
-            } catch (Exception e) { }
-            Logger.saveLog("##pasajeros_Log.txt", String.format("{ Nombre: %s Tiempo: %s || PisoObjetivo: %s PisoActual: %s }\n",
-                    getNombre(), getTiempo(), getPisoObjetivo(), getPisoActual()));
+            } catch (Exception e) {
+            }
+            Logger.saveLog("##pasajeros_Log.txt",
+                    String.format("{ Nombre: %s Tiempo: %s || PisoObjetivo: %s PisoActual: %s }\n",
+                            getNombre(), getTiempo(), getPisoObjetivo(), getPisoActual()));
         }
     }
 

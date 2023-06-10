@@ -17,12 +17,21 @@ public class Logger {
 
     }
 
+    public static void crearLogs(Elevador elevador) {
+        // Llama a los logs
+        saveTimeLine(elevador);
+        saveElevadorLog(elevador);
+    }
+
     /*
      * Crea log general - timeline
      */
     public static void saveTimeLine(Elevador elevador) {
         String tiempoActual = String.format("\nInstante: %s\n", instante);
         String informacion = elevador.informacion();
+        if (instante == 0) {
+            System.out.println("Se guarda un log general de cada instante en /logs/" + LOG_GENERAL);
+        }
         if (elevador.getTiempo() == instante) {
             saveLog(LOG_GENERAL, tiempoActual + informacion);
             instante++;
@@ -38,7 +47,10 @@ public class Logger {
         String nombreArchivo = elevador.getIdentificador() + LOG_ELEVADOR;
 
         String informacion = elevador.informacion();
-
+        if (elevador.getTiempo() == 0) {
+            System.out.println("Se guarda un log del elevador" + elevador.getIdentificador() + " por instante en /logs/"
+                    + nombreArchivo);
+        }
         saveLog(nombreArchivo, informacion);
 
     }
@@ -55,9 +67,4 @@ public class Logger {
         }
     }
 
-    public static void crearLogs(Elevador elevador) {
-        // Llama a los logs
-        saveTimeLine(elevador);
-        saveElevadorLog(elevador);
-    }
 }
