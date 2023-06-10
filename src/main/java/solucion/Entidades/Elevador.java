@@ -2,6 +2,7 @@ package solucion.Entidades;
 
 import solucion.Helpers.Logger;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
@@ -35,7 +36,7 @@ public class Elevador extends Thread {
                 LlamadosElevadoresManager.updateListaPedidos(getTiempo());
                 LlamadosElevadoresManager.detectarInactividad(pasajerosActuales, getSentido());
 
-                // System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
+                 System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
 
                 if (!pasajerosActuales.isEmpty()) {
                     comenzarMovimiento(obtenerObjetivoMasCercano(pasajerosActuales).getPisoObjetivo());
@@ -188,13 +189,18 @@ public class Elevador extends Thread {
         Pasajero pasajeroCercano = null;
         int menorDiferencia = Integer.MAX_VALUE;
 
-        for (Pasajero pasajero : listaPasajeros) {
-            int diferencia = diferenciaDePisos(pasajero.getPisoActual(), this.pisoActual);
-            if (diferencia < menorDiferencia) {
-                pasajeroCercano = pasajero;
-                menorDiferencia = diferencia;
+        try {
+            for (Pasajero pasajero : listaPasajeros) {
+                int diferencia = diferenciaDePisos(pasajero.getPisoActual(), this.pisoActual);
+                if (diferencia < menorDiferencia) {
+                    pasajeroCercano = pasajero;
+                    menorDiferencia = diferencia;
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Punto fragil de ejecucion, listaPasajeros está vacia");
         }
+
         if (pasajeroCercano != null) {
             // System.out.println(pasajeroCercano.getName());
         }

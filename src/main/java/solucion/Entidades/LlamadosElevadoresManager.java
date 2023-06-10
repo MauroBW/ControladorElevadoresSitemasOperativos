@@ -61,12 +61,16 @@ public class LlamadosElevadoresManager {
         elevador2.start();
     }
 
+    /**
+     * Si se cumplen las siguientes condiciones se considera un tiempo inactivo de elevador
+     *  - Sentido de elevador IDLE
+     *  - Lista de pasajeros actuales y pendientes en storage vacias
+     * @param pasajerosActuales
+     * @param sentidoElevador
+     */
     public static void detectarInactividad(List<Pasajero> pasajerosActuales, String sentidoElevador) {
         int sizeListaPasajerosActuales = pasajerosActuales.size();
-        // Si se cumplen las siguientes condiciones se considera un tiempo inactivo de
-        // elevador
-        // - Sentido de elevador IDLE
-        // - Lista de pasajeros actuales y pendientes en storage vacias
+
         if (sizeStorage() + sizeListaPasajerosActuales == 0 && sentidoElevador == "IDLE") {
             tiempoDeInactividad++;
         } else {

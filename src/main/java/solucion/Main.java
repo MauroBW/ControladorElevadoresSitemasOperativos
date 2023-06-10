@@ -22,9 +22,9 @@ public class Main {
 
         LlamadosElevadoresManager.agregarPasajero("P1", 90, 0, 6,0);
         LlamadosElevadoresManager.agregarPasajero("P2", 90, 0, 6, 0);
-        LlamadosElevadoresManager.agregarPasajero("P3", 85,0, 3, 0);
-        LlamadosElevadoresManager.agregarPasajero("P4", 100,0, 6, 20);
-        LlamadosElevadoresManager.agregarPasajero("P5", 70, 0, 6, 20);
+        LlamadosElevadoresManager.agregarPasajero("P3", 85,0, 3, 10);
+        LlamadosElevadoresManager.agregarPasajero("P4", 100,0, 6, 10);
+        LlamadosElevadoresManager.agregarPasajero("P5", 70, 0, 6, 10);
 
         LlamadosElevadoresManager.iniciarElevadores();
 
