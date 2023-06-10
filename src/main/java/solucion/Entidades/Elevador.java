@@ -30,11 +30,12 @@ public class Elevador extends Thread {
 
     @Override
     public void run() {
-        while (true) {
+        while (!LlamadosElevadoresManager.ejecucionElevadores()) {
             try {
                 LlamadosElevadoresManager.updateListaPedidos(getTiempo());
+                LlamadosElevadoresManager.detectarInactividad(pasajerosActuales, getSentido());
 
-                System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
+                // System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
 
                 if (!pasajerosActuales.isEmpty()) {
                     comenzarMovimiento(obtenerObjetivoMasCercano(pasajerosActuales).getPisoObjetivo());
@@ -57,7 +58,7 @@ public class Elevador extends Thread {
                         comenzarMovimiento(clienteCandidato.getPisoActual());
                         if (clienteCandidato.getPisoActual() == getPisoActual()) {
                             subirPasajero(clienteCandidato);
-                            System.out.println("Llegue a candidato");
+                            // System.out.println("Llegue a candidato");
                             candidatos.remove(clienteCandidato);
                         }
                     }
@@ -149,7 +150,7 @@ public class Elevador extends Thread {
             desplazamiento("SUBIR");
         } else {
             sentido = IDLE;
-            System.out.println(getIdentificador() + "Llegue a destino");
+            // System.out.println(getIdentificador() + "Llegue a destino");
         }
     }
 
@@ -171,7 +172,8 @@ public class Elevador extends Thread {
                 Logger.saveLog("LogPasajeros.txt", mostrarInformacion(pasajerosParaEliminar));
             }
 
-            System.out.println("Se bajan los pasajeros: " + mostrarInformacion(pasajerosParaEliminar));
+            // System.out.println("Se bajan los pasajeros: " +
+            // mostrarInformacion(pasajerosParaEliminar));
             getPasajerosActuales().removeAll(pasajerosParaEliminar);
         }
     }
@@ -194,7 +196,7 @@ public class Elevador extends Thread {
             }
         }
         if (pasajeroCercano != null) {
-            System.out.println(pasajeroCercano.getName());
+            // System.out.println(pasajeroCercano.getName());
         }
 
         return pasajeroCercano;
@@ -219,7 +221,7 @@ public class Elevador extends Thread {
             }
         }
         if (pasajeroCercano != null) {
-            System.out.println(pasajeroCercano.getName());
+            // System.out.println(pasajeroCercano.getName());
         }
 
         return pasajeroCercano;
