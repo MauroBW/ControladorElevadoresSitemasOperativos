@@ -41,6 +41,12 @@
             <artifactId>spring-webmvc</artifactId>
             <version>5.3.22</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.8</version> <!-- Usa la última versión disponible -->
+        </dependency>
     </dependencies>
 
     <build>

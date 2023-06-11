@@ -11,6 +11,8 @@ public class Pasajero extends Thread {
     public int pisoActual;
     public int pisoObjetivo;
 
+    public int pisoInicio;
+
     public Pasajero(String nombre, int peso, int pisoActual, int pisoObjetivo, int tiempoInicio) {
         this.nombre = nombre;
         this.peso = peso;
@@ -18,6 +20,7 @@ public class Pasajero extends Thread {
         this.pisoObjetivo = pisoObjetivo;
         this.tiempoInicio = tiempoInicio;
         this.setName(nombre); // Setea el nombre para el hilo
+        this.pisoInicio = pisoActual;
     }
 
     public Pasajero() {
@@ -28,18 +31,20 @@ public class Pasajero extends Thread {
     public void run() {
         while (true) {
             tick();
-
-            // if (getPisoActual() == getPisoObjetivo()) {
-            // System.out.println("Me Bajo!!");
-            // }
-
             try {
+             if (getPisoActual() == getPisoObjetivo()) {
+             System.out.println("Me Bajo!!");
+                 Logger.saveLog("##pasajeros_Log.txt",
+                         String.format("{ Nombre: %s Tiempo: %s || PisoObjetivo: %s PisoInicio: %s }\n",
+                                 getNombre(), getTiempo(), getPisoObjetivo(), getPisoInicio()));
+                 this.stop();
+             }
+
+
                 Thread.sleep(1000);
             } catch (Exception e) {
             }
-            Logger.saveLog("##pasajeros_Log.txt",
-                    String.format("{ Nombre: %s Tiempo: %s || PisoObjetivo: %s PisoActual: %s }\n",
-                            getNombre(), getTiempo(), getPisoObjetivo(), getPisoActual()));
+
         }
     }
 
@@ -73,5 +78,9 @@ public class Pasajero extends Thread {
 
     public int getTiempoInicio() {
         return tiempoInicio;
+    }
+
+    public int getPisoInicio() {
+        return pisoInicio;
     }
 }
