@@ -33,9 +33,10 @@ public class Elevador extends Thread {
     public void run() {
         while (!LlamadosElevadoresManager.ejecucionElevadores()) {
             try {
+                aceptarCliente.acquire();
                 LlamadosElevadoresManager.updateListaPedidos(getTiempo());
                 LlamadosElevadoresManager.detectarInactividad(pasajerosActuales, getSentido());
-
+                aceptarCliente.release();
                  System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
 
                 if (!pasajerosActuales.isEmpty()) {
