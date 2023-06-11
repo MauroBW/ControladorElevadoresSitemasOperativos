@@ -20,7 +20,7 @@ public class LlamadosElevadoresManager {
     }
 
     public static void agregarPasajero(Pasajero pasajero) {
-        pasajero.start();
+
         storage.add(pasajero);
     }
 
@@ -41,6 +41,7 @@ public class LlamadosElevadoresManager {
 
         for (Pasajero pasajero : storage) {
             if (pasajero.getTiempoInicio() == tiempoUpdate) {
+                pasajero.start(); // Lo inicio cuando hace la peticion
                 pasajerosAsignados.add(pasajero);
                 listaPasajeros.add(pasajero);
             }
@@ -50,9 +51,6 @@ public class LlamadosElevadoresManager {
 
     public static void iniciarElevadores() {
         updateListaPedidos(0);
-        for (Pasajero pasajero : listaPasajeros) {
-            pasajero.start();
-        }
 
         Elevador elevador1 = new Elevador(0, "##1", listaPasajeros);
         elevador1.start();

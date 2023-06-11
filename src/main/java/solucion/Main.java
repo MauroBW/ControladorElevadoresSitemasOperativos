@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
 
-        Helper.cargarSimulacion(Helper.leerSimulacion("prueba.csv"));
+        Helper.cargarSimulacion(Helper.leerSimulacion("simulaciones/prueba_2.csv"));
 
 //        Thread.sleep(2000);
 //        SpringApplication.run(Main.class, args); // Si se quiere levantar la api, descomentar linea
