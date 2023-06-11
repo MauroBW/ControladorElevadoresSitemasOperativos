@@ -16,15 +16,19 @@ import java.util.Queue;
 
 @SpringBootApplication
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
+
+        Helper.cargarSimulacion(Helper.leerSimulacion("prueba.csv"));
+
+//        Thread.sleep(2000);
 //        SpringApplication.run(Main.class, args); // Si se quiere levantar la api, descomentar linea
 
-        LlamadosElevadoresManager.agregarPasajero("P1", 90, 0, 6,0);
-        LlamadosElevadoresManager.agregarPasajero("P2", 90, 0, 6, 0);
-        LlamadosElevadoresManager.agregarPasajero("P3", 85,0, 3, 10);
-        LlamadosElevadoresManager.agregarPasajero("P4", 100,0, 6, 10);
-        LlamadosElevadoresManager.agregarPasajero("P5", 70, 0, 6, 10);
+//        LlamadosElevadoresManager.agregarPasajero("P1", 90, 0, 6,0);
+//        LlamadosElevadoresManager.agregarPasajero("P2", 90, 0, 6, 0);
+//        LlamadosElevadoresManager.agregarPasajero("P3", 85,0, 3, 1);
+//        LlamadosElevadoresManager.agregarPasajero("P4", 100,0, 6, 5);
+//        LlamadosElevadoresManager.agregarPasajero("P5", 70, 0, 6, 10);
 
         LlamadosElevadoresManager.iniciarElevadores();
 
