@@ -39,32 +39,38 @@ public class Elevador extends Thread {
                 aceptarCliente.release();
                  System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
 
-                if (!pasajerosActuales.isEmpty()) {
-                    comenzarMovimiento(obtenerObjetivoMasCercano(pasajerosActuales).getPisoObjetivo());
-                    bajarClientes();
-                } else {
-                    if (!listaCompletaPasajeros.isEmpty()) {
-                        if (pasajerosActuales.size() < CAPACIDAD) {
-                            aceptarCliente.acquire();
+                if (!listaCompletaPasajeros.isEmpty()) {
+                    if (pasajerosActuales.size() < CAPACIDAD) {
+                        aceptarCliente.acquire();
 
-                            Pasajero aux = procesarNuevoPedido(); // Obtiene pedido mas cercano de
-                                                                  // listaCompletaPasajeros
-                            candidatos.add(aux);
-                            listaCompletaPasajeros.remove(aux);
+                        Pasajero aux = procesarNuevoPedido(); // Obtiene pedido mas cercano de
+                        // listaCompletaPasajeros
+                        candidatos.add(aux);
+                        listaCompletaPasajeros.remove(aux);
 
-                            aceptarCliente.release();
-                        }
+                        aceptarCliente.release();
                     }
                     if (!candidatos.isEmpty()) {
                         Pasajero clienteCandidato = obtenerPasajeroMasCercano(candidatos);
                         comenzarMovimiento(clienteCandidato.getPisoActual());
                         if (clienteCandidato.getPisoActual() == getPisoActual()) {
                             subirPasajero(clienteCandidato);
-                            // System.out.println("Llegue a candidato");
+                             System.out.println("Llegue a candidato");
                             candidatos.remove(clienteCandidato);
                         }
                     }
+
+                    if (!pasajerosActuales.isEmpty()) {
+                        comenzarMovimiento(obtenerObjetivoMasCercano(pasajerosActuales).getPisoObjetivo());
+                        bajarClientes();
+                    }
                 }
+
+
+
+
+
+
 
                 if (pasajerosActuales.isEmpty() && listaCompletaPasajeros.isEmpty() && candidatos.isEmpty()) {
                     // throw new RuntimeException("Ejecucion terminada");
