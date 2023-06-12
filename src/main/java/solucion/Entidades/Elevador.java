@@ -44,6 +44,10 @@ public class Elevador extends Thread {
                         aceptarCliente.acquire();
 
                         Pasajero aux = procesarNuevoPedido(); // Obtiene pedido mas cercano de
+
+                        // Agregar pasajero con piso actual
+
+
                         // listaCompletaPasajeros
                         candidatos.add(aux);
                         listaCompletaPasajeros.remove(aux);
@@ -59,11 +63,10 @@ public class Elevador extends Thread {
                             candidatos.remove(clienteCandidato);
                         }
                     }
-
-                    if (!pasajerosActuales.isEmpty()) {
-                        comenzarMovimiento(obtenerObjetivoMasCercano(pasajerosActuales).getPisoObjetivo());
-                        bajarClientes();
-                    }
+                }
+                if (!pasajerosActuales.isEmpty()) {
+                    comenzarMovimiento(obtenerObjetivoMasCercano(pasajerosActuales).getPisoObjetivo());
+                    bajarClientes();
                 }
 
 
