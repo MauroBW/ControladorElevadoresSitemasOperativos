@@ -17,7 +17,7 @@ import java.util.Random;
 public class Helper {
     public static String generarIdentificador() {
         Date fechaActual = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_Hm");
         String fechaFormateada = dateFormat.format(fechaActual);
         String sb = "";
 

@@ -11,6 +11,7 @@ public class Pasajero extends Thread {
     public int pisoActual;
     public int pisoObjetivo;
 
+    public String sentido;
     public int pisoInicio;
 
     public Pasajero(String nombre, int peso, int pisoActual, int pisoObjetivo, int tiempoInicio) {
@@ -21,6 +22,7 @@ public class Pasajero extends Thread {
         this.tiempoInicio = tiempoInicio;
         this.setName(nombre); // Setea el nombre para el hilo
         this.pisoInicio = pisoActual;
+        this.sentido = determinarSentido();
     }
 
     public Pasajero() {
@@ -82,5 +84,26 @@ public class Pasajero extends Thread {
 
     public int getPisoInicio() {
         return pisoInicio;
+    }
+
+    public String getSentido() {
+        return sentido;
+    }
+
+    private String determinarSentido() {
+        int diferencia = getPisoActual() - getPisoObjetivo(); // 1 - 8
+        if (diferencia < 0) {
+            return "SUBIR";
+        } else {
+            return "BAJAR";
+        }
+    }
+
+    public void mostrarInformacionPasajero() {
+        System.out.printf("\n%s, A:%s, D:%s, %s\n",
+                getNombre(),
+                getPisoActual(),
+                getPisoObjetivo(),
+                getSentido());
     }
 }

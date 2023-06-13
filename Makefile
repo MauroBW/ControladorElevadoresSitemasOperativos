@@ -4,8 +4,9 @@ LOG_DIR := logs
 LOG_FILES := $(wildcard $(LOG_DIR)/*.txt)
 
 clean:
+    mkdir -p $(LOG_DIR); \
+    echo "Eliminando archivos"; \
 	@if [ -n "$(LOG_FILES)" ]; then \
-		echo "Eliminando archivos de registro..."; \
 		mkdir -p $(LOG_DIR)/old ; \
 		mv $(LOG_FILES) $(LOG_DIR)/old ; \
 	fi
