@@ -45,6 +45,14 @@ public class Elevador extends Thread {
                     // mas de paso
                     setearSentido(obtenerObjetivoMasCercano(pasajerosActuales).getPisoObjetivo());
 
+                    // obtenerPasajerosPuedenSubir(listaCompletaPasajeros)
+                    // Mientras haya capacidad tengo que subir a los que me sirven
+                    //
+                    // de la lista pasajeros pueden subir debo quitarlo
+                    // mantener concordancia con lista general
+                    // debo tomar la lista general para quitar
+                    // revisar si se puede hacer una unica vez y no repetir en else
+
                     // Movimiento de elevador
                     desplazamiento(sentido);
                     bajarClientes();
@@ -282,6 +290,36 @@ public class Elevador extends Thread {
      */
     private boolean hayCapacidad() {
         return (getPesoPasajerosActuales() < (LIMITEPESO - 100) && getCantidadPasajerosActuales() < CAPACIDAD);
+    }
+
+    /**
+     * 
+     * @param pasajero
+     * @return Verdadero si estoy en piso pasajero y voy hacia su objetivo
+     */
+    private boolean puedeSubirPasajero(Pasajero pasajero) {
+        if (getSentido() == pasajero.getSentido()) {
+            if (pasajero.getPisoObjetivo() > getPisoActual() && sentido == "SUBIENDO") {
+                return true;
+            } else if (pasajero.getPisoObjetivo() < getPisoActual() && sentido == "BAJANDO") {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    private List<Pasajero> obtenerPasajerosPuedenSubir(List<Pasajero> listaPasajerosTotal) {
+        List<Pasajero> salidaPasajeros = new ArrayList();
+
+        for (Pasajero pasajero : listaPasajerosTotal) {
+            if (puedeSubirPasajero(pasajero)) {
+                salidaPasajeros.add(pasajero);
+            }
+        }
+        return salidaPasajeros;
     }
 
     /********************************************************************************
