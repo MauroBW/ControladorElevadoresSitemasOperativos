@@ -15,7 +15,8 @@ public class Elevador extends Thread {
     private List<Pasajero> candidatos = new ArrayList<>();
     private static Semaphore aceptarCliente = new Semaphore(1);
     private static Semaphore log = new Semaphore(1);
-    private int CAPACIDAD = 2;
+    private int CAPACIDAD = 5;
+    private int LIMITEPESO = 400;
     private final String SUBIENDO = "SUBIENDO";
     private final String BAJANDO = "BAJANDO";
     private final String IDLE = "IDLE";
@@ -37,10 +38,15 @@ public class Elevador extends Thread {
                 LlamadosElevadoresManager.updateListaPedidos(getTiempo());
                 LlamadosElevadoresManager.detectarInactividad(pasajerosActuales, getSentido());
                 aceptarCliente.release();
-                 System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
+                System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
 
                 if (!pasajerosActuales.isEmpty()) {
-                    comenzarMovimiento(obtenerObjetivoMasCercano(pasajerosActuales).getPisoObjetivo());
+                    // Antes de dirigirme al piso objetivo debo checkear si puedo llevar a alguien
+                    // mas de paso
+                    setearSentido(obtenerObjetivoMasCercano(pasajerosActuales).getPisoObjetivo());
+
+                    // Movimiento de elevador
+                    desplazamiento(sentido);
                     bajarClientes();
                 } else {
                     if (!listaCompletaPasajeros.isEmpty()) {
@@ -57,7 +63,8 @@ public class Elevador extends Thread {
                     }
                     if (!candidatos.isEmpty()) {
                         Pasajero clienteCandidato = obtenerPasajeroMasCercano(candidatos);
-                        comenzarMovimiento(clienteCandidato.getPisoActual());
+                        setearSentido(clienteCandidato.getPisoActual());
+                        desplazamiento(sentido);
                         if (clienteCandidato.getPisoActual() == getPisoActual()) {
                             subirPasajero(clienteCandidato);
                             // System.out.println("Llegue a candidato");
@@ -68,7 +75,8 @@ public class Elevador extends Thread {
 
                 if (pasajerosActuales.isEmpty() && listaCompletaPasajeros.isEmpty() && candidatos.isEmpty()) {
                     // throw new RuntimeException("Ejecucion terminada");
-                    comenzarMovimiento(0);
+                    setearSentido(0);
+                    desplazamiento(sentido);
                 }
 
                 // Sincronizacion para Logger
@@ -80,7 +88,7 @@ public class Elevador extends Thread {
                 Thread.sleep(1000);
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new RuntimeException("Se rompio todito");
+                throw new RuntimeException("Error en el controlador de elevadores. Se ejecuta protocolo de seguridad.");
             }
         }
     }
@@ -124,6 +132,18 @@ public class Elevador extends Thread {
         return obtenerPasajeroMasCercano(listaCompletaPasajeros);
     }
 
+    public int getCantidadPasajerosActuales() {
+        return pasajerosActuales.size();
+    }
+
+    public int getPesoPasajerosActuales() {
+        int pesoTotal = 0;
+        for (Pasajero pasajero : pasajerosActuales) {
+            pesoTotal += pasajero.getPeso();
+        }
+        return pesoTotal;
+    }
+
     /********************************************************************************
      * Fin Getters, setters y funciones aux
      ********************************************************************************/
@@ -137,22 +157,18 @@ public class Elevador extends Thread {
     }
 
     /**
-     * Realiza movimiento del Elevador hacia objetivo
      * 
      * @param pisoObjetivo:
      *                      - Si pisoObjetivo es menor a pisoActual, entonces Bajo
      *                      - Si pisoObjetivo es mayor a pisoActual, entonces Subo
      */
-    public void comenzarMovimiento(int pisoObjetivo) {
+    public void setearSentido(int pisoObjetivo) {
         if (pisoObjetivo < getPisoActual()) {
             sentido = BAJANDO;
-            desplazamiento("BAJAR");
         } else if (pisoObjetivo > getPisoActual()) {
             sentido = SUBIENDO;
-            desplazamiento("SUBIR");
         } else {
             sentido = IDLE;
-            // System.out.println(getIdentificador() + "Llegue a destino");
         }
     }
 
@@ -250,17 +266,22 @@ public class Elevador extends Thread {
      */
     public void desplazamiento(String sentido) {
         switch (sentido) {
-            case "SUBIR":
-                // System.out.println(getIdentificador() + "Subiendo");
-                sentido = SUBIENDO;
+            case "SUBIENDO":
                 this.pisoActual++;
                 break;
-            case "BAJAR":
-                // System.out.println(getIdentificador() + "Bajando");
-                sentido = BAJANDO;
+            case "BAJANDO":
                 this.pisoActual--;
                 break;
         }
+    }
+
+    /**
+     * 
+     * @return Verdadero si tiene capacidad para incluir 1 pasajero mas, falso en
+     *         caso contrario.
+     */
+    private boolean hayCapacidad() {
+        return (getPesoPasajerosActuales() < (LIMITEPESO - 100) && getCantidadPasajerosActuales() < CAPACIDAD);
     }
 
     /********************************************************************************
