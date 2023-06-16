@@ -2,7 +2,6 @@ package solucion.Entidades;
 
 import solucion.Helpers.Logger;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
@@ -28,6 +27,7 @@ public class Elevador extends Thread {
         this.pisoActual = pisoActual;
         this.identificador = identificador;
         this.listaCompletaPasajeros = listaCompletaPasajeros;
+        this.sentido = IDLE;
     }
 
     @Override
@@ -36,53 +36,60 @@ public class Elevador extends Thread {
             try {
                 aceptarCliente.acquire();
                 LlamadosElevadoresManager.updateListaPedidos(getTiempo());
-                LlamadosElevadoresManager.detectarInactividad(pasajerosActuales, getSentido());
+                LlamadosElevadoresManager.detectarInactividad(pasajerosActuales, getSentidoElevador());
                 aceptarCliente.release();
+
+
                 System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
 
-                if (!pasajerosActuales.isEmpty()) {
-                    // Antes de dirigirme al piso objetivo debo checkear si puedo llevar a alguien
-                    // mas de paso
+
+                if (hayPasajerosEnCabina()) {
+                    // Hay pasajeros en cabina
                     setearSentido(obtenerObjetivoMasCercano(pasajerosActuales).getPisoObjetivo());
 
-                    // obtenerPasajerosPuedenSubir(listaCompletaPasajeros)
-                    // Mientras haya capacidad tengo que subir a los que me sirven
-                    //
-                    // de la lista pasajeros pueden subir debo quitarlo
-                    // mantener concordancia con lista general
-                    // debo tomar la lista general para quitar
-                    // revisar si se puede hacer una unica vez y no repetir en else
+                    if (hayPasajerosEsperando()) {
+                        // Busco pasjeros para compartir el viaje
+                            aceptarCliente.acquire();
 
-                    // Movimiento de elevador
+                            if(!obtenerPasajerosPuedenSubir(listaCompletaPasajeros).isEmpty()) {
+                                // Hay pasajeros que pueden subir. Coinciden en piso con elevador y sentido
+                                List<Pasajero> aux = obtenerPasajerosPuedenSubir(listaCompletaPasajeros);
+                                subirPasajeros(aux);
+                                listaCompletaPasajeros.removeAll(aux);
+                            }
+
+                            aceptarCliente.release();
+                    }
+
                     desplazamiento(sentido);
                     bajarClientes();
                 } else {
-                    if (!listaCompletaPasajeros.isEmpty()) {
-                        if (pasajerosActuales.size() < CAPACIDAD) {
+                    // No hay pasajeros en cabina
+
+                    if (hayPasajerosEsperando()) {
+                        // Hay pasajeros esperando a ser atendidos
                             aceptarCliente.acquire();
 
-                            Pasajero aux = procesarNuevoPedido(); // Obtiene pedido mas cercano de
-                                                                  // listaCompletaPasajeros
-                            candidatos.add(aux);
-                            listaCompletaPasajeros.remove(aux);
+                            if(!obtenerPasajerosPuedenSubir(listaCompletaPasajeros).isEmpty()) {
+                                // Hay pasajeros que pueden subir. Coinciden en piso con elevador y sentido
+
+                                List<Pasajero> aux = obtenerPasajerosPuedenSubir(listaCompletaPasajeros);
+                                subirPasajeros(aux);
+                                listaCompletaPasajeros.removeAll(aux);
+                            } else {
+
+                                // No hay pasajeros en cabina ni en el mismo piso que el elevador
+
+                                Pasajero pasajero = obtenerPasajeroMasCercano(listaCompletaPasajeros);
+                                setearSentido(pasajero.getPisoActual());
+                                desplazamiento(getSentidoElevador());
+                            }
 
                             aceptarCliente.release();
-                        }
-                    }
-                    if (!candidatos.isEmpty()) {
-                        Pasajero clienteCandidato = obtenerPasajeroMasCercano(candidatos);
-                        setearSentido(clienteCandidato.getPisoActual());
-                        desplazamiento(sentido);
-                        if (clienteCandidato.getPisoActual() == getPisoActual()) {
-                            subirPasajero(clienteCandidato);
-                            // System.out.println("Llegue a candidato");
-                            candidatos.remove(clienteCandidato);
-                        }
                     }
                 }
 
                 if (pasajerosActuales.isEmpty() && listaCompletaPasajeros.isEmpty() && candidatos.isEmpty()) {
-                    // throw new RuntimeException("Ejecucion terminada");
                     setearSentido(0);
                     desplazamiento(sentido);
                 }
@@ -92,6 +99,7 @@ public class Elevador extends Thread {
                 Logger.crearLogs(this);
                 log.release();
 
+                System.out.println(informacion());
                 tick();
                 Thread.sleep(1000);
             } catch (Exception e) {
@@ -113,7 +121,7 @@ public class Elevador extends Thread {
         return pisoActual;
     }
 
-    public String getSentido() {
+    public String getSentidoElevador() {
         return sentido;
     }
 
@@ -126,6 +134,10 @@ public class Elevador extends Thread {
 
     public int getTiempo() {
         return tiempo;
+    }
+
+    public int getCAPACIDAD() {
+        return CAPACIDAD;
     }
 
     public String getTickRateMasID() {
@@ -152,20 +164,38 @@ public class Elevador extends Thread {
         return pesoTotal;
     }
 
+    public boolean hayPasajerosEnCabina() {
+        return !getPasajerosActuales().isEmpty();
+    }
+
+    public boolean hayPasajerosEsperando() {
+        return !listaCompletaPasajeros.isEmpty();
+    }
+
+    /**
+     *
+     * @return Verdadero si tiene capacidad para incluir 1 pasajero mas, falso en
+     *         caso contrario.
+     */
+    private boolean hayCapacidad() {
+        return (getPesoPasajerosActuales() < (LIMITEPESO - 100) && getCantidadPasajerosActuales() < CAPACIDAD);
+    }
+
     /********************************************************************************
      * Fin Getters, setters y funciones aux
      ********************************************************************************/
 
-    /********************************************************************************
-     * Inicio lógica y operaciones
-     ********************************************************************************/
 
-    private void subirPasajero(Pasajero aux) {
-        this.pasajerosActuales.add(aux);
+
+
+    public int getLIMITEPESO() {
+        return LIMITEPESO;
     }
 
+     /********************************************************************************
+     * Inicio lógica y operaciones
+     ********************************************************************************/
     /**
-     * 
      * @param pisoObjetivo:
      *                      - Si pisoObjetivo es menor a pisoActual, entonces Bajo
      *                      - Si pisoObjetivo es mayor a pisoActual, entonces Subo
@@ -181,28 +211,82 @@ public class Elevador extends Thread {
     }
 
     /**
-     * Recorre la lista de pasajerosActuales y baja a los que coincidan en
-     * pisoObjetivo
-     * Con pisoActual del Elevador
+     * Sube o Baja una unidad dependiendo del sentido de navegaciín
+     *
+     * @param sentido: Sentido para la navegación
      */
-    public void bajarClientes() {
-        if (!getPasajerosActuales().isEmpty()) {
-            List<Pasajero> pasajerosParaEliminar = new ArrayList<>();
-            for (Pasajero pasajero : getPasajerosActuales()) {
-                if (pasajero.getPisoObjetivo() == getPisoActual()) {
-                    pasajero.setPisoActual(getPisoActual());
-                    pasajerosParaEliminar.add(pasajero);
-                }
-            }
-            if (!pasajerosParaEliminar.isEmpty()) {
-                Logger.saveLog("LogPasajeros.txt", mostrarInformacion(pasajerosParaEliminar));
-            }
-
-            // System.out.println("Se bajan los pasajeros: " +
-            // mostrarInformacion(pasajerosParaEliminar));
-            getPasajerosActuales().removeAll(pasajerosParaEliminar);
+    public void desplazamiento(String sentido) {
+        switch (sentido) {
+            case SUBIENDO:
+                this.pisoActual++;
+                break;
+            case BAJANDO:
+                this.pisoActual--;
+                break;
         }
     }
+
+    /**
+     * Baja los clientes que coinciden en pisoActual con pisoObjetivo
+     */
+    public void bajarClientes() {
+        List<Pasajero> pasajerosParaBajar = new ArrayList<>();
+        for (Pasajero pasajero : getPasajerosActuales()) {
+            if (pasajero.getPisoObjetivo() == getPisoActual()) {
+                pasajerosParaBajar.add(pasajero);
+                pasajero.setPisoActual(getPisoActual());
+            }
+        }
+        if (!pasajerosParaBajar.isEmpty()) {
+            Logger.saveLog("LogPasajeros.txt", mostrarInformacion(pasajerosParaBajar));
+        }
+
+        getPasajerosActuales().removeAll(pasajerosParaBajar);
+    }
+
+
+    /**
+     * @param pasajero
+     * @return Verdadero si estoy en piso pasajero y voy hacia su objetivo
+     */
+    private boolean puedeSubirPasajero(Pasajero pasajero) {
+        if (getPisoActual() == pasajero.getPisoActual()) {
+            if (pasajero.getPisoObjetivo() > getPisoActual() && (getSentidoElevador() == SUBIENDO || getSentidoElevador() == IDLE)) {
+                return true;
+            } else if (pasajero.getPisoObjetivo() < getPisoActual() && (getSentidoElevador() == BAJANDO || getSentidoElevador() == IDLE)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Devuelve lista de pasajeros que pueden subir considerando la capacidad restante del elevador
+     * @param listaPasajerosTotal
+     * @return
+     */
+    private List<Pasajero> obtenerPasajerosPuedenSubir(List<Pasajero> listaPasajerosTotal) {
+        List<Pasajero> salidaPasajeros = new ArrayList();
+        int capacidadInicial = getCAPACIDAD() - getCantidadPasajerosActuales();
+        int pesoInicial = getLIMITEPESO() - getPesoPasajerosActuales();
+        for (Pasajero pasajero : listaPasajerosTotal) {
+            if (puedeSubirPasajero(pasajero) && capacidadInicial > 0 && pesoInicial > 100) {
+
+                salidaPasajeros.add(pasajero);
+                pesoInicial-= pasajero.getPeso();
+                capacidadInicial--;
+            }
+        }
+        return salidaPasajeros;
+    }
+
+    private void subirPasajeros(List<Pasajero> pasajeros) {
+        this.pasajerosActuales.addAll(pasajeros);
+    }
+
 
     /**
      * Devuelve el pasajero cuyo pisoActual es el más cercano al elevador
@@ -267,60 +351,6 @@ public class Elevador extends Thread {
         return Math.abs(piso_1 - piso_2);
     }
 
-    /**
-     * Sube o Baja una unidad dependiendo del sentido de navegaciín
-     * 
-     * @param sentido: Sentido para la navegación
-     */
-    public void desplazamiento(String sentido) {
-        switch (sentido) {
-            case "SUBIENDO":
-                this.pisoActual++;
-                break;
-            case "BAJANDO":
-                this.pisoActual--;
-                break;
-        }
-    }
-
-    /**
-     * 
-     * @return Verdadero si tiene capacidad para incluir 1 pasajero mas, falso en
-     *         caso contrario.
-     */
-    private boolean hayCapacidad() {
-        return (getPesoPasajerosActuales() < (LIMITEPESO - 100) && getCantidadPasajerosActuales() < CAPACIDAD);
-    }
-
-    /**
-     * 
-     * @param pasajero
-     * @return Verdadero si estoy en piso pasajero y voy hacia su objetivo
-     */
-    private boolean puedeSubirPasajero(Pasajero pasajero) {
-        if (getSentido() == pasajero.getSentido()) {
-            if (pasajero.getPisoObjetivo() > getPisoActual() && sentido == "SUBIENDO") {
-                return true;
-            } else if (pasajero.getPisoObjetivo() < getPisoActual() && sentido == "BAJANDO") {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    private List<Pasajero> obtenerPasajerosPuedenSubir(List<Pasajero> listaPasajerosTotal) {
-        List<Pasajero> salidaPasajeros = new ArrayList();
-
-        for (Pasajero pasajero : listaPasajerosTotal) {
-            if (puedeSubirPasajero(pasajero)) {
-                salidaPasajeros.add(pasajero);
-            }
-        }
-        return salidaPasajeros;
-    }
 
     /********************************************************************************
      * Fin lógica y operaciones
@@ -357,7 +387,7 @@ public class Elevador extends Thread {
      */
     public String informacion() {
         return String.format("[[ Elevador: %s , Piso Actual: %s, Sentido: %s, Pasajeros: %s|]]\n", getTickRateMasID(),
-                getPisoActual(), getSentido(), mostrarInformacionPasajerosEnCabina());
+                getPisoActual(), getSentidoElevador(), mostrarInformacionPasajerosEnCabina());
     }
 
     /********************************************************************************

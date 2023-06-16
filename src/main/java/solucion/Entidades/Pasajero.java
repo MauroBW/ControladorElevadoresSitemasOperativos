@@ -35,7 +35,6 @@ public class Pasajero extends Thread {
             tick();
             try {
              if (getPisoActual() == getPisoObjetivo()) {
-             System.out.println("Me Bajo!!");
                  Logger.saveLog("##pasajeros_Log.txt",
                          String.format("{ Nombre: %s Tiempo: %s || PisoObjetivo: %s PisoInicio: %s }\n",
                                  getNombre(), getTiempo(), getPisoObjetivo(), getPisoInicio()));
