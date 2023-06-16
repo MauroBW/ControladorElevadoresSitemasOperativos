@@ -1,10 +1,13 @@
 package solucion.Entidades;
 
 import org.springframework.boot.actuate.endpoint.web.Link;
+import solucion.Helpers.Helper;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.Semaphore;
+
+import static solucion.Helpers.Helper.colorizer;
 
 public class LlamadosElevadoresManager {
     private static List<Pasajero> listaPasajeros = new LinkedList<>();
@@ -41,7 +44,7 @@ public class LlamadosElevadoresManager {
 
         for (Pasajero pasajero : storage) {
             if (pasajero.getTiempoInicio() <= tiempoUpdate) {
-                System.out.println("@ Nueva Solicitud recibida");
+                colorizer(Helper.ConsoleColor.RED, "@ Nueva Solicitud recibida @ Piso: " + pasajero.getPisoActual());
                 pasajero.start(); // Lo inicio cuando hace la peticion
                 pasajerosAsignados.add(pasajero);
                 listaPasajeros.add(pasajero);
@@ -83,7 +86,7 @@ public class LlamadosElevadoresManager {
                     "Se detecta inactividad en los elevadores por un tiempo prolongado. Se detiene simulación.");
             System.out.println(
                     " ------------------------------------------------------------------------------------------");
-            detenerElevadores();
+//            detenerElevadores();
         }
     }
 

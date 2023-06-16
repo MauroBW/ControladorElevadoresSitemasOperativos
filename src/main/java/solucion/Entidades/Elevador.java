@@ -1,9 +1,12 @@
 package solucion.Entidades;
 
+import solucion.Helpers.Helper;
 import solucion.Helpers.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
+
+import static solucion.Helpers.Helper.colorizer;
 
 public class Elevador extends Thread {
     private int pisoActual;
@@ -99,7 +102,7 @@ public class Elevador extends Thread {
                 Logger.crearLogs(this);
                 log.release();
 
-                System.out.println(informacion());
+                colorizer(Helper.ConsoleColor.CYAN, informacion());
                 tick();
                 Thread.sleep(1000);
             } catch (Exception e) {
@@ -138,6 +141,10 @@ public class Elevador extends Thread {
 
     public int getCAPACIDAD() {
         return CAPACIDAD;
+    }
+
+    public int getLIMITEPESO() {
+        return LIMITEPESO;
     }
 
     public String getTickRateMasID() {
@@ -188,9 +195,6 @@ public class Elevador extends Thread {
 
 
 
-    public int getLIMITEPESO() {
-        return LIMITEPESO;
-    }
 
      /********************************************************************************
      * Inicio lógica y operaciones
@@ -239,6 +243,7 @@ public class Elevador extends Thread {
         }
         if (!pasajerosParaBajar.isEmpty()) {
             Logger.saveLog("LogPasajeros.txt", mostrarInformacion(pasajerosParaBajar));
+            colorizer(Helper.ConsoleColor.YELLOW, mostrarInformacion(pasajerosParaBajar));
         }
 
         getPasajerosActuales().removeAll(pasajerosParaBajar);
@@ -306,9 +311,7 @@ public class Elevador extends Thread {
                     menorDiferencia = diferencia;
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Punto fragil de ejecucion, listaPasajeros está vacia");
-        }
+        } catch (Exception e) {}
 
         if (pasajeroCercano != null) {
             // System.out.println(pasajeroCercano.getName());
