@@ -40,7 +40,8 @@ public class LlamadosElevadoresManager {
         List<Pasajero> pasajerosAsignados = new LinkedList<>();
 
         for (Pasajero pasajero : storage) {
-            if (pasajero.getTiempoInicio() == tiempoUpdate) {
+            if (pasajero.getTiempoInicio() <= tiempoUpdate) {
+                System.out.println("@ Nueva Solicitud recibida");
                 pasajero.start(); // Lo inicio cuando hace la peticion
                 pasajerosAsignados.add(pasajero);
                 listaPasajeros.add(pasajero);
