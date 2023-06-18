@@ -9,10 +9,7 @@ import solucion.Entidades.Pasajero;
 import java.io.FileReader;
 import java.io.Reader;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Helper {
     public static String generarIdentificador() {
@@ -55,11 +52,33 @@ public class Helper {
                 Pasajero pasajero = new Pasajero(nombre, peso, pisoActual, pisoObjetivo, tiempoInicio);
                 pasajeros.add(pasajero);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        } catch (Exception e) {e.printStackTrace();}
         return pasajeros;
+    }
+
+    public static HashMap<Integer, Integer> informacionSimulacion(String filepath) {
+        HashMap<Integer, Integer> ocurrencias = new HashMap<>();
+
+        try {
+            Reader in = new FileReader(filepath);
+            CSVParser parser = CSVFormat.DEFAULT
+                    .withHeader("nombre", "peso", "pisoActual", "pisoObjetivo", "tiempoInicio")
+                    .withDelimiter(',')
+                    .parse(in);
+
+            for (CSVRecord record : parser) {
+                int tiempoInicio = Integer.parseInt(record.get("tiempoInicio"));
+                if(ocurrencias.containsKey(tiempoInicio)) {
+                    ocurrencias.put(tiempoInicio, ocurrencias.get(tiempoInicio) + 1);
+                } else {
+                    ocurrencias.put(tiempoInicio, 1);
+                }
+            }
+        } catch (Exception e) {e.printStackTrace();}
+
+        Logger.saveJson("test", ocurrencias);
+
+        return ocurrencias;
     }
 
     public static void cargarSimulacion(List<Pasajero> pasajeros) {

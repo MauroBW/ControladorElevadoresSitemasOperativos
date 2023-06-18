@@ -6,6 +6,7 @@ import solucion.Entidades.Pasajero;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayDeque;
+import java.util.HashMap;
 
 public class Logger {
     public static int instante = 0;
@@ -61,10 +62,19 @@ public class Logger {
             FileWriter writer = new FileWriter(rutaAGuardar, true);
             writer.write(text);
             writer.close();
-        } catch (Exception e) {
-            System.out.println("Ha ocurrido un error al escribir el archivo.");
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace();}
     }
 
+    public static void saveJson(String fileName, HashMap<Integer, Integer> json) {
+        try {
+            String rutaAGuardar = "logs/info-" + fileName;
+            for (int clave : json.keySet()){
+                String text = String.format("%s,%s\n", clave, json.get(clave));
+
+                FileWriter writer = new FileWriter(rutaAGuardar, true);
+                writer.write(text);
+                writer.close();
+            }
+        } catch (Exception e) { e.printStackTrace();}
+    }
 }
