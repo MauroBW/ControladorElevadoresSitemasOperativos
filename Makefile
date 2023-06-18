@@ -5,6 +5,7 @@ LOG_FILES := $(wildcard $(LOG_DIR)/*.txt)
 
 clean:
 	@mkdir -p $(LOG_DIR);
+	@mkdir -p $(LOG_DIR)/info;
 	@echo "Eliminando archivos";
 	@if [ -n "$(LOG_FILES)" ]; then \
 		mkdir -p $(LOG_DIR)/old ; \

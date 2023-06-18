@@ -14,7 +14,6 @@ public class Elevador extends Thread {
     private int tiempo = 0;
     private List<Pasajero> pasajerosActuales = new ArrayList<>();
     private static List<Pasajero> listaCompletaPasajeros;
-    private List<Pasajero> candidatos = new ArrayList<>();
     private static Semaphore aceptarCliente = new Semaphore(1);
     private static Semaphore log = new Semaphore(1);
     private int CAPACIDAD = 5;
@@ -23,6 +22,7 @@ public class Elevador extends Thread {
     private final String BAJANDO = "BAJANDO";
     private final String IDLE = "IDLE";
     private String sentido;
+    private int CANTIDAD_VIAJES = 0;
 
     public Elevador(int pisoActual,
             String identificador,
@@ -40,11 +40,12 @@ public class Elevador extends Thread {
                 aceptarCliente.acquire();
                 LlamadosElevadoresManager.updateListaPedidos(getTiempo());
                 LlamadosElevadoresManager.detectarInactividad(pasajerosActuales, getSentidoElevador());
-                aceptarCliente.release();
+
 
 
                 System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
-
+                System.out.println(mostrarInformacion(listaCompletaPasajeros));
+                aceptarCliente.release();
 
                 if (hayPasajerosEnCabina()) {
                     // Hay pasajeros en cabina
@@ -92,9 +93,9 @@ public class Elevador extends Thread {
                     }
                 }
 
-                if (pasajerosActuales.isEmpty() && listaCompletaPasajeros.isEmpty() && candidatos.isEmpty()) {
-                    setearSentido(0);
-                    desplazamiento(sentido);
+                if (pasajerosActuales.isEmpty() && listaCompletaPasajeros.isEmpty()) {
+//                    setearSentido(0);
+//                    desplazamiento(sentido);
                 }
 
                 // Sincronizacion para Logger
@@ -188,6 +189,18 @@ public class Elevador extends Thread {
         return (getPesoPasajerosActuales() < (LIMITEPESO - 100) && getCantidadPasajerosActuales() < CAPACIDAD);
     }
 
+    private int getCANTIDAD_VIAJES() {
+        return CANTIDAD_VIAJES;
+    }
+
+    public void setCANTIDAD_VIAJES(int CANTIDAD_VIAJES) {
+        this.CANTIDAD_VIAJES = CANTIDAD_VIAJES;
+    }
+
+    private void sumarContadorViajes() {
+        setCANTIDAD_VIAJES(getCANTIDAD_VIAJES() + 1);
+    }
+
     /********************************************************************************
      * Fin Getters, setters y funciones aux
      ********************************************************************************/
@@ -239,6 +252,7 @@ public class Elevador extends Thread {
             if (pasajero.getPisoObjetivo() == getPisoActual()) {
                 pasajerosParaBajar.add(pasajero);
                 pasajero.setPisoActual(getPisoActual());
+                sumarContadorViajes();
             }
         }
         if (!pasajerosParaBajar.isEmpty()) {
@@ -389,8 +403,8 @@ public class Elevador extends Thread {
      * @return Devuelve String con toda la información del elevador
      */
     public String informacion() {
-        return String.format("[[ Elevador: %s , Piso Actual: %s, Sentido: %s, Pasajeros: %s|]]\n", getTickRateMasID(),
-                getPisoActual(), getSentidoElevador(), mostrarInformacionPasajerosEnCabina());
+        return String.format("[[ Elevador: %s , Piso Actual: %s, ViajesCompletados: %s, Sentido: %s, Pasajeros: %s|]]\n", getTickRateMasID(),
+                getPisoActual(), getCANTIDAD_VIAJES(), getSentidoElevador(), mostrarInformacionPasajerosEnCabina());
     }
 
     /********************************************************************************

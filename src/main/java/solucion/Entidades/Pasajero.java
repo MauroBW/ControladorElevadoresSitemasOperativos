@@ -38,14 +38,11 @@ public class Pasajero extends Thread {
                  Logger.saveLog("##pasajeros_Log.txt",
                          String.format("{ Nombre: %s Tiempo: %s || PisoObjetivo: %s PisoInicio: %s }\n",
                                  getNombre(), getTiempo(), getPisoObjetivo(), getPisoInicio()));
+                 Logger.saveLog("DATA_VIAJES_REALIZADOS.txt", String.format("%s,%s\n", getNombre(), getTiempo()));
                  this.stop();
              }
-
-
-                Thread.sleep(1000);
-            } catch (Exception e) {
-            }
-
+             Thread.sleep(1000);
+            } catch (Exception e) {}
         }
     }
 
