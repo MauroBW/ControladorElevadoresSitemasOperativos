@@ -15,8 +15,8 @@ public class PasajerosController {
         try{
             for(Pasajero nuevoPasajero: pasajeros) {
                 LlamadosElevadoresManager.agregarPasajero(nuevoPasajero);
-                System.out.printf("API :: Nombre: %s | Peso: %s | PisoActual: %s | PisoObjetivo%s\n",
-                        nuevoPasajero.getNombre(), nuevoPasajero.getPeso(), nuevoPasajero.getPisoActual(), nuevoPasajero.getPisoObjetivo());
+                System.out.printf("API :: Nombre: %s | Peso: %s | PisoActual: %s | PisoObjetivo: %s\n",
+                        nuevoPasajero.getNombre(), nuevoPasajero.getPeso(), nuevoPasajero.getPisoActual(), nuevoPasajero.getPisoObjetivo(), nuevoPasajero.getTiempoInicio());
             }
         } catch (Exception e) {}
         return ResponseEntity.ok("Persona creada con éxito");
