@@ -10,14 +10,14 @@ Run:
 `docker compose up`
 
 API:
-- Pasajeros path: http://localhost:8080/pasajero
-- Body: {
+- Pasajeros path: http://localhost:8080/generadorCarga
+- Body: [{
   "nombre": "Juan",
   "peso": 80,
   "pisoActual": 3,
   "pisoObjetivo": 7,
   "tiempoInicio": 10
-  }
+  }]
 
 ToDo:
 - Diagrama de flujo para documentacion (Lucid)
