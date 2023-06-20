@@ -20,11 +20,8 @@ API:
   }
 
 ToDo:
-- Clean up en clase de Elevador y Pasajero
-- Analizar update en Manager para que reordene (segun que criterio?)
-- Tracker cantidad de viajes por elevador
 - Diagrama de flujo para documentacion (Lucid)
-- 
+
 
 
 Done:
@@ -34,3 +31,6 @@ Done:
 - ~~- Sacar logs dentro de elevador~~
 - ~~- Definir que es el balanceo de uso de elevadores~~
 - ~~Actualizar el piso Actual de los pasajeros en cada movimiento del elevador (Elevador)~~
+~~- Tracker cantidad de viajes por elevador~~
+~~- Analizar update en Manager para que reordene (segun que criterio?)~~
+~~- Clean up en clase de Elevador y Pasajero~~
