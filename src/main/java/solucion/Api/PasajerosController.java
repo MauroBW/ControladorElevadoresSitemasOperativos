@@ -2,6 +2,7 @@ package solucion.Api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import solucion.Entidades.Llamado;
 import solucion.Entidades.LlamadosElevadoresManager;
 import solucion.Entidades.Pasajero;
 
@@ -10,16 +11,25 @@ import java.util.List;
 @RestController
 public class PasajerosController {
 
-    @PostMapping("/pasajero")
-    public ResponseEntity<String> crearPersona(@RequestBody List<Pasajero> pasajeros) {
-        try{
-            for(Pasajero nuevoPasajero: pasajeros) {
-                LlamadosElevadoresManager.agregarPasajero(nuevoPasajero);
-                System.out.printf("API :: Nombre: %s | Peso: %s | PisoActual: %s | PisoObjetivo: %s\n",
-                        nuevoPasajero.getNombre(), nuevoPasajero.getPeso(), nuevoPasajero.getPisoActual(), nuevoPasajero.getPisoObjetivo(), nuevoPasajero.getTiempoInicio());
-            }
-        } catch (Exception e) {}
-        return ResponseEntity.ok("Persona creada con éxito");
+    @PostMapping("/generadorCarga")
+    public ResponseEntity<String> generadorCarga(@RequestBody List<Llamado> llamados) {
+        String res = "";
+
+        for(Llamado llamado : llamados) {
+            res += String.format("\nNuevo Pasajero: \n%s\n%s\n%s\n%s\n%s",
+                    llamado.getNombre(),
+                    llamado.getPeso(),
+                    llamado.getPisoActual(),
+                    llamado.getPisoObjetivo(),
+                    llamado.getTiempoInicio());
+            Pasajero pasajero = new Pasajero(llamado.getNombre(),
+                    llamado.getPeso(),
+                    llamado.getPisoActual(),
+                    llamado.getPisoObjetivo(),
+                    llamado.getTiempoInicio());
+            LlamadosElevadoresManager.agregarPasajero(pasajero);
+        }
+        return ResponseEntity.ok(res);
     }
 }
 

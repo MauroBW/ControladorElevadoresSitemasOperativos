@@ -51,6 +51,29 @@ public class LlamadosElevadoresManager {
             }
         }
         storage.removeAll(pasajerosAsignados);
+
+        reordenar(listaPasajeros);
+
+    }
+
+    private static void reordenar(List<Pasajero> listaPasajeros) {
+        int n = listaPasajeros.size();
+
+        // Recorremos todos los elementos de la lista
+        for (int i = 0; i < n-1; i++) {
+
+            // Los últimos i elementos ya están ordenados
+            for (int j = 0; j < n-i-1; j++) {
+
+                // Si el tiempo de un pasajero es menor al tiempo del siguiente pasajero
+                if (listaPasajeros.get(j).getTiempo() < listaPasajeros.get(j+1).getTiempo()) {
+                    // Entonces intercambiamos los pasajeros
+                    Pasajero temp = listaPasajeros.get(j);
+                    listaPasajeros.set(j, listaPasajeros.get(j+1));
+                    listaPasajeros.set(j+1, temp);
+                }
+            }
+        }
     }
 
     public static void iniciarElevadores() {
@@ -61,6 +84,9 @@ public class LlamadosElevadoresManager {
 
         Elevador elevador2 = new Elevador(0, "##2", listaPasajeros);
         elevador2.start();
+
+        Elevador elevador3 = new Elevador(0, "##3", listaPasajeros);
+        elevador3.start();
     }
 
     /**

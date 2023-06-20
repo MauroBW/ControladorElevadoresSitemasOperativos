@@ -289,14 +289,14 @@ public class Elevador extends Thread {
      */
     private List<Pasajero> obtenerPasajerosPuedenSubir(List<Pasajero> listaPasajerosTotal) {
         List<Pasajero> salidaPasajeros = new ArrayList();
-        int capacidadInicial = getCAPACIDAD() - getCantidadPasajerosActuales();
-        int pesoInicial = getLIMITEPESO() - getPesoPasajerosActuales();
+        int capacidadDisponible = getCAPACIDAD() - getCantidadPasajerosActuales();
+        int pesoDisponible = getLIMITEPESO() - getPesoPasajerosActuales();
         for (Pasajero pasajero : listaPasajerosTotal) {
-            if (puedeSubirPasajero(pasajero) && capacidadInicial > 0 && pesoInicial > 100) {
+            if (puedeSubirPasajero(pasajero) && capacidadDisponible > 0 && pesoDisponible > pasajero.getPeso()) {
 
                 salidaPasajeros.add(pasajero);
-                pesoInicial-= pasajero.getPeso();
-                capacidadInicial--;
+                pesoDisponible -= pasajero.getPeso();
+                capacidadDisponible--;
             }
         }
         return salidaPasajeros;
