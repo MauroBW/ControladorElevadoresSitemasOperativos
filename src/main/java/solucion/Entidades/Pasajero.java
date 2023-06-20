@@ -66,6 +66,34 @@ public class Pasajero extends Thread {
         return pisoActual;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPeso(int peso) {
+        this.peso = peso;
+    }
+
+    public void setPisoInicio(int pisoInicio) {
+        this.pisoInicio = pisoInicio;
+    }
+
+    public void setPisoObjetivo(int pisoObjetivo) {
+        this.pisoObjetivo = pisoObjetivo;
+    }
+
+    public void setSentido(String sentido) {
+        this.sentido = sentido;
+    }
+
+    public void setTiempo(int tiempo) {
+        this.tiempo = tiempo;
+    }
+
+    public void setTiempoInicio(int tiempoInicio) {
+        this.tiempoInicio = tiempoInicio;
+    }
+
     public String getNombre() {
         return nombre;
     }
