@@ -11,8 +11,8 @@ import java.util.HashMap;
 public class Logger {
     public static int instante = 0;
     public static final String identificador = Helper.generarIdentificador();
-    public static final String LOG_GENERAL = "LogGeneral_" + identificador + ".txt";
-    public static final String LOG_ELEVADOR = "_LogElevador_" + identificador + ".txt";
+    public static final String LOG_GENERAL =  "LogGeneral.txt";
+    public static final String LOG_ELEVADOR =  "LogElevador";
     public static String SIMULACION_ACTUAL = "";
 
     public Logger() {
@@ -46,7 +46,7 @@ public class Logger {
      * Crea log por elevador
      */
     public static void saveElevadorLog(Elevador elevador) {
-        String nombreArchivo = elevador.getIdentificador() + LOG_ELEVADOR;
+        String nombreArchivo =  LOG_ELEVADOR + elevador.getIdentificador() + ".txt";
 
         String informacion = elevador.informacion();
         if (elevador.getTiempo() == 0) {
@@ -58,7 +58,7 @@ public class Logger {
     }
 
     public static void saveLog(String fileName, String text) {
-        String rutaAGuardar = String.format("logs/%s_%s", SIMULACION_ACTUAL, fileName );
+        String rutaAGuardar = String.format("logs/%s_%s_%s", identificador, SIMULACION_ACTUAL, fileName );
         try {
             FileWriter writer = new FileWriter(rutaAGuardar, true);
             writer.write(text);

@@ -44,7 +44,7 @@ public class Elevador extends Thread {
 
 
                 System.out.println("Clientes Esperando: " + listaCompletaPasajeros.size());
-                System.out.println(mostrarInformacion(listaCompletaPasajeros));
+//                System.out.println(mostrarInformacion(listaCompletaPasajeros));
                 aceptarCliente.release();
 
                 if (hayPasajerosEnCabina()) {
@@ -105,7 +105,7 @@ public class Elevador extends Thread {
 
                 colorizer(Helper.ConsoleColor.CYAN, informacion());
                 tick();
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new RuntimeException("Error en el controlador de elevadores. Se ejecuta protocolo de seguridad.");

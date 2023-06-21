@@ -14,22 +14,9 @@ import java.util.*;
 public class Helper {
     public static String generarIdentificador() {
         Date fechaActual = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_Hm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("Hm_s_yyyyMMdd");
         String fechaFormateada = dateFormat.format(fechaActual);
-        String sb = "";
-
-        // Concateno Fecha
-        sb += (fechaFormateada + "_");
-
-        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-        Random random = new Random();
-        for (int i = 0; i < 6; i++) {
-            int index = random.nextInt(caracteres.length());
-            sb += (caracteres.charAt(index));
-        }
-
-        return sb.toString();
+        return fechaFormateada;
     }
 
     public static List<Pasajero> leerSimulacion(String filepath) {

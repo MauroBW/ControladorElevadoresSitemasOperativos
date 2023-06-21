@@ -14,17 +14,15 @@ public class Main {
 
 
         Simulacion simulacionActual = Simulacion.SOAK_TEST;
-
         String SIMULACION_PATH = (simulacionActual.getArchivoCSV());
+
         Logger.setSimulacionActual(simulacionActual.getNombreSimulacion());
 
-        Helper.cargarSimulacion(
-                Helper.leerSimulacion(SIMULACION_PATH));
-
+        Helper.cargarSimulacion(Helper.leerSimulacion(SIMULACION_PATH));
         Helper.informacionSimulacion(SIMULACION_PATH);
 
         SpringApplication.run(Main.class, args); // Si se quiere levantar la api, descomentar linea
-
-        LlamadosElevadoresManager.iniciarElevadores();
+        LlamadosElevadoresManager.setPriorizarDemorados(false);
+        LlamadosElevadoresManager.iniciarElevadores(3);
     }
 }
