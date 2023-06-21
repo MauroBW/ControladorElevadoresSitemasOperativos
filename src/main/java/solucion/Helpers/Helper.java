@@ -56,6 +56,11 @@ public class Helper {
         return pasajeros;
     }
 
+    /**
+     * Analiza la cantidad de llamados que hay por instante en toda la simulacion
+     * @param filepath: Simulacion path
+     * @return Hashmap <Instante, Cantidad Llamados>
+     */
     public static HashMap<Integer, Integer> informacionSimulacion(String filepath) {
         HashMap<Integer, Integer> ocurrencias = new HashMap<>();
 

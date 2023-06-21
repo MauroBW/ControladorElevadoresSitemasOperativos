@@ -112,7 +112,7 @@ public class LlamadosElevadoresManager {
                     "Se detecta inactividad en los elevadores por un tiempo prolongado. Se detiene simulación.");
             System.out.println(
                     " ------------------------------------------------------------------------------------------");
-//            detenerElevadores();
+            detenerElevadores();
         }
     }
 

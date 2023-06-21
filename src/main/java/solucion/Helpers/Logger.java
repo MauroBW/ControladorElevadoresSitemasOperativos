@@ -13,6 +13,7 @@ public class Logger {
     public static final String identificador = Helper.generarIdentificador();
     public static final String LOG_GENERAL = "LogGeneral_" + identificador + ".txt";
     public static final String LOG_ELEVADOR = "_LogElevador_" + identificador + ".txt";
+    public static String SIMULACION_ACTUAL = "";
 
     public Logger() {
 
@@ -57,7 +58,7 @@ public class Logger {
     }
 
     public static void saveLog(String fileName, String text) {
-        String rutaAGuardar = "logs/" + fileName;
+        String rutaAGuardar = String.format("logs/%s_%s", SIMULACION_ACTUAL, fileName );
         try {
             FileWriter writer = new FileWriter(rutaAGuardar, true);
             writer.write(text);
@@ -76,5 +77,9 @@ public class Logger {
                 writer.close();
             }
         } catch (Exception e) { e.printStackTrace();}
+    }
+
+    public static void setSimulacionActual(String simulacionActual) {
+        SIMULACION_ACTUAL = simulacionActual;
     }
 }

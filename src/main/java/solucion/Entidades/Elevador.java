@@ -94,8 +94,8 @@ public class Elevador extends Thread {
                 }
 
                 if (pasajerosActuales.isEmpty() && listaCompletaPasajeros.isEmpty()) {
-//                    setearSentido(0);
-//                    desplazamiento(sentido);
+                    setearSentido(0);
+                    desplazamiento(sentido);
                 }
 
                 // Sincronizacion para Logger
