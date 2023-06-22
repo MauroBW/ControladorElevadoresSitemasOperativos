@@ -14,7 +14,6 @@ public class LlamadosElevadoresManager {
     private static List<Pasajero> storage = new LinkedList<>();
     private static int tiempoDeInactividad = 0;
     private static volatile boolean detenerElevadores = false;
-    private static Boolean PRIORIZAR_DEMORADOS = true;
 
     public LlamadosElevadoresManager() {
     }
@@ -43,11 +42,7 @@ public class LlamadosElevadoresManager {
 
         reordenar(listaPasajeros);
     }
-
-    public static void setPriorizarDemorados(Boolean priorizarDemorados) {
-        PRIORIZAR_DEMORADOS = priorizarDemorados;
-    }
-
+    
     private static void reordenar(List<Pasajero> listaPasajeros) {
         int n = listaPasajeros.size();
 
