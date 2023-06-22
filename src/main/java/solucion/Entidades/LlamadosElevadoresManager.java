@@ -42,7 +42,7 @@ public class LlamadosElevadoresManager {
 
         reordenar(listaPasajeros);
     }
-    
+
     private static void reordenar(List<Pasajero> listaPasajeros) {
         int n = listaPasajeros.size();
 

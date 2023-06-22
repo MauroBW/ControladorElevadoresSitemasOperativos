@@ -29,6 +29,6 @@ public class Main {
         Helper.informacionSimulacion(SIMULACION_PATH);
 
         SpringApplication.run(Main.class, args); // Si se quiere levantar la api, descomentar linea
-        LlamadosElevadoresManager.iniciarElevadores(2);
+        LlamadosElevadoresManager.iniciarElevadores(3);
     }
 }
