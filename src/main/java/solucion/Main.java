@@ -3,6 +3,7 @@ package solucion;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import solucion.Entidades.LlamadosElevadoresManager;
+import solucion.Helpers.DataConstant;
 import solucion.Helpers.Helper;
 import solucion.Helpers.Logger;
 import solucion.Helpers.Simulacion;
@@ -12,6 +13,7 @@ import solucion.Helpers.Simulacion;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
+        DataConstant.SIMULATION_SPEED = DataConstant.FAST_RUN;
         Simulacion simulacionActual = Simulacion.STRESS_TEST;
         String SIMULACION_PATH = (simulacionActual.getArchivoCSV());
 
