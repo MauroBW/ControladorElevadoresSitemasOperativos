@@ -68,7 +68,7 @@ public class Helper {
             }
         } catch (Exception e) {e.printStackTrace();}
 
-        Logger.saveJson("test", ocurrencias);
+        Logger.saveJson("Carga_por_tiempo.txt", ocurrencias);
 
         return ocurrencias;
     }

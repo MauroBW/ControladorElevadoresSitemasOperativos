@@ -12,7 +12,6 @@ import solucion.Helpers.Simulacion;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-
         Simulacion simulacionActual = Simulacion.STRESS_TEST;
         String SIMULACION_PATH = (simulacionActual.getArchivoCSV());
 

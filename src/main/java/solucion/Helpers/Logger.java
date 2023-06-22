@@ -68,7 +68,7 @@ public class Logger {
 
     public static void saveJson(String fileName, HashMap<Integer, Integer> json) {
         try {
-            String rutaAGuardar = "logs/info-" + fileName;
+            String rutaAGuardar = String.format("logs/%s_%s_%s", identificador, SIMULACION_ACTUAL, fileName );
             for (int clave : json.keySet()){
                 String text = String.format("%s,%s\n", clave, json.get(clave));
 
