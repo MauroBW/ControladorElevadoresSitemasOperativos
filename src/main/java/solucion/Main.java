@@ -8,13 +8,19 @@ import solucion.Helpers.Helper;
 import solucion.Helpers.Logger;
 import solucion.Helpers.Simulacion;
 
+import java.io.File;
+
 
 @SpringBootApplication
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
+        // Crea Log folder si no existe
+        File dir = new File("logs");
+        if (!dir.exists()) dir.mkdir();
+
         DataConstant.SIMULATION_SPEED = DataConstant.FAST_RUN;
-        Simulacion simulacionActual = Simulacion.STRESS_TEST;
+        Simulacion simulacionActual = Simulacion.LOAD_TEST;
         String SIMULACION_PATH = (simulacionActual.getArchivoCSV());
 
         Logger.setSimulacionActual(simulacionActual.getNombreSimulacion());
