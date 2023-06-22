@@ -1,13 +1,18 @@
 # ControladorElevadoresSitemasOperativos
 
-Proyecto dockerizado con imágen: maven:3.8.1-openjdk-11
+### Controlador de Elevadores realizado para tarea: Obligatiorio Sistemas Operativos 2023
+
+Proyecto dockerizado con imágen: `maven:3.8.1-openjdk-11`
 
 ### Requisitos:
 - IntelliJ Idea
+- Java 11
 - Docker
 
 Run:
-`docker compose up`
+```
+docker compose up
+```
 
 API:
 - Pasajeros path: http://localhost:8080/generadorCarga
