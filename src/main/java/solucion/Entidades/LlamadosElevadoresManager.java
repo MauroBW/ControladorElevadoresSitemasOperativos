@@ -41,9 +41,7 @@ public class LlamadosElevadoresManager {
         }
         storage.removeAll(pasajerosAsignados);
 
-//        if (PRIORIZAR_DEMORADOS) {
-            reordenar(listaPasajeros);
-//        }
+        reordenar(listaPasajeros);
     }
 
     public static void setPriorizarDemorados(Boolean priorizarDemorados) {

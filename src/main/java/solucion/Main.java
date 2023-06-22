@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
 
-        Simulacion simulacionActual = Simulacion.SOAK_TEST;
+        Simulacion simulacionActual = Simulacion.STRESS_TEST;
         String SIMULACION_PATH = (simulacionActual.getArchivoCSV());
 
         Logger.setSimulacionActual(simulacionActual.getNombreSimulacion());

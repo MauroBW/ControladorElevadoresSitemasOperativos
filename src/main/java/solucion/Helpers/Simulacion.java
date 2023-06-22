@@ -3,7 +3,7 @@ package solucion.Helpers;
 public enum Simulacion {
     LOAD_TEST("simulaciones/loadTest.csv"),
     STRESS_TEST("simulaciones/stressTest.csv"),
-    SOAK_TEST("simulaciones/SOAK.csv");
+    SOAK_TEST("simulaciones/SOAKFinal.csv");
 
     private final String archivoCSV;
 
