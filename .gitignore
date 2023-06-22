@@ -2,3 +2,7 @@ target/*
 logs/*
 .vscode/
 .idea/
+
+simulaciones/.DS_Store
+
+.DS_Store

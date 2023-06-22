@@ -41,7 +41,7 @@ public class Pasajero extends Thread {
                  Logger.saveLog("DATA_VIAJES_REALIZADOS.txt", String.format("%s,%s\n", getNombre(), getTiempo()));
                  this.stop();
              }
-             Thread.sleep(1000);
+             Thread.sleep(100);
             } catch (Exception e) {}
         }
     }

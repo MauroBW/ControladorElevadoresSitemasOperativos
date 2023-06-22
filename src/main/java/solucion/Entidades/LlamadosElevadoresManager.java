@@ -14,6 +14,7 @@ public class LlamadosElevadoresManager {
     private static List<Pasajero> storage = new LinkedList<>();
     private static int tiempoDeInactividad = 0;
     private static volatile boolean detenerElevadores = false;
+    private static Boolean PRIORIZAR_DEMORADOS = true;
 
     public LlamadosElevadoresManager() {
     }
@@ -24,18 +25,6 @@ public class LlamadosElevadoresManager {
 
     public static void agregarPasajero(Pasajero pasajero) {
 
-        storage.add(pasajero);
-    }
-
-    public static void agregarPasajero(String nombre, int peso, int pisoOrigen, int pisoDestino, int tiempoInicio) {
-        Pasajero pasajero = new Pasajero(nombre, peso, pisoOrigen, pisoDestino, tiempoInicio);
-        /*
-         * 
-         * Acá se va a generar la lógica al agregar el pasajero.
-         * A su vez esta clase debe controlar o saber el tiempo, ya que a cada cambio de
-         * tiempo se debe reordenar la lista.
-         * 
-         */
         storage.add(pasajero);
     }
 
@@ -53,7 +42,10 @@ public class LlamadosElevadoresManager {
         storage.removeAll(pasajerosAsignados);
 
         reordenar(listaPasajeros);
+    }
 
+    public static void setPriorizarDemorados(Boolean priorizarDemorados) {
+        PRIORIZAR_DEMORADOS = priorizarDemorados;
     }
 
     private static void reordenar(List<Pasajero> listaPasajeros) {
@@ -76,17 +68,13 @@ public class LlamadosElevadoresManager {
         }
     }
 
-    public static void iniciarElevadores() {
+    public static void iniciarElevadores(int cantidadElevadores) {
         updateListaPedidos(0);
 
-        Elevador elevador1 = new Elevador(0, "##1", listaPasajeros);
-        elevador1.start();
-
-        Elevador elevador2 = new Elevador(0, "##2", listaPasajeros);
-        elevador2.start();
-
-        Elevador elevador3 = new Elevador(0, "##3", listaPasajeros);
-        elevador3.start();
+        for (int i = 0; i < cantidadElevadores; i++) {
+            Elevador elevadorAux = new Elevador(0, "##" + (i + 1) , listaPasajeros);
+            elevadorAux.start();
+        }
     }
 
     /**
@@ -106,13 +94,10 @@ public class LlamadosElevadoresManager {
         }
 
         if (tiempoDeInactividad == 5) {
-            System.out.println(
-                    " ------------------------------------------------------------------------------------------");
-            System.out.println(
-                    "Se detecta inactividad en los elevadores por un tiempo prolongado. Se detiene simulación.");
-            System.out.println(
-                    " ------------------------------------------------------------------------------------------");
-//            detenerElevadores();
+            System.out.println(" ------------------------------------------------------------------------------------------\n" +
+                    "Se detecta inactividad en los elevadores por un tiempo prolongado. Se detiene simulación.\n" +
+                    " ------------------------------------------------------------------------------------------\n");
+            detenerElevadores();
         }
     }
 
