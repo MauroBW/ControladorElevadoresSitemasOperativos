@@ -15,20 +15,32 @@ import java.io.File;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
+        /**
+         * =====================================================================================
+         *                                  LEER README
+         * =====================================================================================
+         */
+
         // Crea Log folder si no existe
         File dir = new File("logs");
         if (!dir.exists()) dir.mkdir();
 
-        DataConstant.SIMULATION_SPEED = DataConstant.FAST_RUN;
-        Simulacion simulacionActual = Simulacion.LOAD_TEST;
+        // Velocidad de Simulacion
+        DataConstant.SIMULATION_SPEED = DataConstant.SLOW_RUN;
+        Simulacion simulacionActual = Simulacion.SOAK_TEST;
+
         String SIMULACION_PATH = (simulacionActual.getArchivoCSV());
 
         Logger.setSimulacionActual(simulacionActual.getNombreSimulacion());
 
+        // Lectura de simulación
         Helper.cargarSimulacion(Helper.leerSimulacion(SIMULACION_PATH));
         Helper.informacionSimulacion(SIMULACION_PATH);
 
-        SpringApplication.run(Main.class, args); // Si se quiere levantar la api, descomentar linea
+        // Run de SPRING BOOT
+        SpringApplication.run(Main.class, args);
+
+        // Indicar cantidad de elevadores a simular
         LlamadosElevadoresManager.iniciarElevadores(3);
     }
 }
