@@ -1,4 +1,4 @@
-# ControladorElevadoresSitemasOperativos
+# ControladorElevadoresSistemasOperativos
 
 ### Controlador de Elevadores realizado para tarea: Obligatiorio Sistemas Operativos 2023
 
