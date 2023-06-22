@@ -1,5 +1,6 @@
 package solucion.Entidades;
 
+import solucion.Helpers.DataConstant;
 import solucion.Helpers.Helper;
 import solucion.Helpers.Logger;
 import java.util.ArrayList;
@@ -105,7 +106,7 @@ public class Elevador extends Thread {
 
                 colorizer(Helper.ConsoleColor.CYAN, informacion());
                 tick();
-                Thread.sleep(100);
+                Thread.sleep(DataConstant.SIMULATION_SPEED);
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new RuntimeException("Error en el controlador de elevadores. Se ejecuta protocolo de seguridad.");

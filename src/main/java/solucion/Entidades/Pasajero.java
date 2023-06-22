@@ -1,5 +1,6 @@
 package solucion.Entidades;
 
+import solucion.Helpers.DataConstant;
 import solucion.Helpers.Logger;
 
 public class Pasajero extends Thread {
@@ -35,13 +36,13 @@ public class Pasajero extends Thread {
             tick();
             try {
              if (getPisoActual() == getPisoObjetivo()) {
-                 Logger.saveLog("##pasajeros_Log.txt",
+                 Logger.saveLog("##Pasajeros_Log_General.txt",
                          String.format("{ Nombre: %s Tiempo: %s || PisoObjetivo: %s PisoInicio: %s }\n",
                                  getNombre(), getTiempo(), getPisoObjetivo(), getPisoInicio()));
-                 Logger.saveLog("DATA_VIAJES_REALIZADOS.txt", String.format("%s,%s\n", getNombre(), getTiempo()));
+                 Logger.saveLog("Informacion_viajes_completados.txt", String.format("%s,%s\n", getNombre(), getTiempo()));
                  this.stop();
              }
-             Thread.sleep(100);
+             Thread.sleep(DataConstant.SIMULATION_SPEED);
             } catch (Exception e) {}
         }
     }
